@@ -1,0 +1,45 @@
+.dropdown {
+    position: relative;
+    width: 164px;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 20px;
+    background-color: #0E0D0D;
+    border: solid 1px #0E0D0D;
+}
+
+.dropdown-container:hover {
+    border: solid 1px #DA0BB8;
+}
+
+.dropdown-container:hover > .dropdown-button-reverse {
+    display: block;
+}
+
+.dropdown-button {
+    background-color: #DA0BB8;
+    font-size: 20px;
+    color: #F9EBE0;
+    text-decoration: none;
+    font-weight: bold;
+    width: 162px;
+    height: 60px;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    line-height: 60px;
+    font-family: "Arial", sans-serif;
+    cursor: pointer;
+    border: solid 1px #DA0BB8;
+}
+
+.dropdown-button-reverse {
+    background-color: #0E0D0D;
+    border: solid 1px #DA0BB8;
+    margin-top: 9px;
+    display: none;
+}

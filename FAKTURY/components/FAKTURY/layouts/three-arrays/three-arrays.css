@@ -1,0 +1,11 @@
+.three-arrays {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1284px;
+    justify-content: space-between;
+    margin: 55px auto 75px;
+}
+
+.three-arrays .array:last-of-type {
+    margin: 87px auto 0;
+}
