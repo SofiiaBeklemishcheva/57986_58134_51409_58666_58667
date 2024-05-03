@@ -1,0 +1,116 @@
+.array-cell {
+    color: #F9EBE0;
+    background-color: #0E0D0D;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Arial", sans-serif;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.array-cell-small {
+    height: 54px;
+    width: 140px;
+}
+
+.array-cell-large {
+    height: 76px;
+    width: 150px;
+}
+
+.array-cell-label {
+    height: 48px;
+}
+
+.array-cell-label-s {
+    width: 82px;
+}
+
+.array-cell-label-m {
+    width: 82px;
+}
+
+.array-cell-label-l {
+    width: 124px;
+}
+
+.array-cell-label-xl {
+    width: 230px;
+}
+
+.array-cell.array-cell-no-border {
+    border: none;
+}
+
+.array-cell-label-calendar {
+    position: relative;
+}
+
+.array-cell-label-calendar > .array-cell {
+    padding-right: 20px;
+    display: inline-block;
+}
+
+.array-cell-label-calendar:after {
+    content: "📅";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    line-height: 28px;
+    font-size: 20px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.array-cell.dropdown {
+    align-items: flex-start;
+}
+
+.array-cell.dropdown .dropdown-button {
+    background-color: #0E0D0D;
+}
+
+.array-cell.dropdown .dropdown-container {
+    margin-top: -6px;
+}
+
+.array-blue .array-cell.dropdown .dropdown-container {
+    border: solid 1px #3131B8;
+}
+
+.array-purple .array-cell.dropdown .dropdown-container {
+    border: solid 1px #B137E9;
+}
+
+.array-cell.dropdown .dropdown-container {
+    width: 100%;
+    min-height: 100%;
+}
+
+.array-blue .array-cell.dropdown .dropdown-container:hover span.dropdown-button {
+    background-color: #3131B8;
+}
+
+.array-purple .array-cell.dropdown .dropdown-container:hover span.dropdown-button {
+    background-color: #B137E9;
+}
+
+.array-cell.dropdown span.dropdown-button {
+    border: none;
+    width: auto;
+    line-height: 74px;
+    height: 74px;
+}
+
+.array-blue .array-cell.dropdown .dropdown-button-reverse {
+    border: solid 1px #3131B8;
+}
+
+.array-purple .array-cell.dropdown .dropdown-button-reverse {
+    border: solid 1px #B137E9;
+}

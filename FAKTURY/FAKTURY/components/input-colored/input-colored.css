@@ -1,0 +1,20 @@
+.input-colored {
+    width: 100%;
+}
+
+.input-colored-input {
+    color: #F9EBE0;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 20px;
+    display: inline-block;
+    text-align: center;
+    background-color: #B137E9;
+    font-family: "Arial", sans-serif;
+    height: 71px;
+    line-height: 61px;
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+    width: 100%;
+}

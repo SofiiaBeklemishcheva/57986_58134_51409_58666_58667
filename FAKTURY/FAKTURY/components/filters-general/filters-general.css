@@ -1,0 +1,11 @@
+.filters-general {
+    display: flex;
+}
+
+.filters-general > .array-cell-label-s {
+    margin: 0 12px 0 30px;
+}
+
+.filters-general > .button-inline {
+    margin-left: 30px;
+}

@@ -1,0 +1,7 @@
+.balance-summary {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 1306px;
+    justify-content: space-between;
+}
