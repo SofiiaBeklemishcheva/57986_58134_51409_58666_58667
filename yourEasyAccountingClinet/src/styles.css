@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+/* Label styles */
+.label {
+  color: #f9ebe0;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  font-family: "Arial";
+}
+.label-logo {
+  background-color: #3131b8;
+  text-transform: uppercase;
+  width: 305px;
+  height: 68px;
+  line-height: 68px;
+  font-size: 20px;
+}
+.label-header {
+  width: calc(100% - 24px);
+  height: 62px;
+  line-height: 62px;
+  font-size: 18px;
+}
+.label-header-blue {
+  background-color: #3131b8;
+}
+.label-header-purple {
+  background-color: #b137e9;
+}
+/* Dropdown styles */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-container:hover > .dropdown-button-reverse {
+  display: block;
+}
+
+.dropdown-button {
+  background-color: #da0bb8;
+  font-size: 20px;
+  color: #f9ebe0;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: bold;
+  width: 164px;
+  height: 60px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 60px;
+  font-family: "Arial";
+  cursor: pointer;
+}
+
+.dropdown-button-reverse {
+  background-color: #0e0d0d;
+  border: solid 1px #da0bb8;
+  margin-top: 9px;
+  display: none;
+}
+/*Button styles */
+.button {
+  background-color: #da0bb8;
+  font-size: 20px;
+  color: #f9ebe0;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: bold;
+  width: 164px;
+  height: 60px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 60px;
+  font-family: "Arial";
+}
