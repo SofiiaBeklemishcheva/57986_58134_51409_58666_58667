@@ -32,10 +32,12 @@
 .dropdown-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .dropdown-container:hover > .dropdown-button-reverse {
   display: block;
+  position: fixed;
 }
 
 .dropdown-button {
@@ -76,4 +78,49 @@
   text-align: center;
   line-height: 60px;
   font-family: "Arial";
+}
+
+/*E-mail styles */
+.email {
+  display: flex;
+  align-items: center;
+  width: 33%;
+  margin-bottom: 34px;
+}
+
+.email-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 30px;
+}
+
+.email-label {
+  font-size: 20px;
+  color: #f9ebe0;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+}
+
+/*Universal styles */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0e0d0d;
+  color: #f9ebe0;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+}
+
+::placeholder {
+  color: #f9ebe0;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: #f9ebe0;
 }
