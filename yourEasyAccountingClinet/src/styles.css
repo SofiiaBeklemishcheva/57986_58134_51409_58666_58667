@@ -124,3 +124,253 @@ body {
   /* Edge 12 -18 */
   color: #f9ebe0;
 }
+
+/* Input colored  */
+.input-colored {
+  width: 100%;
+}
+
+.input-colored-input {
+  color: #f9ebe0;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  background-color: #b137e9;
+  font-family: "Arial", sans-serif;
+  height: 71px;
+  line-height: 61px;
+  border: none;
+  padding: 5px;
+  font-size: 20px;
+  width: 100%;
+}
+
+/* Filters general  */
+.filters-general {
+  display: flex;
+}
+
+.filters-general > .array-cell-label-s {
+  margin: 0 12px 0 30px;
+}
+
+.filters-general > .button-inline {
+  margin-left: 30px;
+}
+
+/* Array  */
+.array {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 20px;
+  width: fit-content;
+  align-items: center;
+  background-color: #0e0d0d;
+  padding: 18px;
+}
+
+.array-purple {
+  border: solid 1px #b137e9;
+}
+
+.array-purple .array-cell,
+.array-purple-borderless .array-cell {
+  border: solid 1px #b137e9;
+}
+
+.array-purple .label-header,
+.array-purple-borderless .label-header {
+  background-color: #b137e9;
+}
+
+.array-blue {
+  border: solid 1px #3131b8;
+}
+
+.array-blue .array-cell,
+.array-blue-borderless .array-cell {
+  border: solid 1px #3131b8;
+}
+
+.array-blue .label-header,
+.array-blue-borderless .label-header {
+  background-color: #3131b8;
+}
+
+.array-container {
+  margin-top: 18px;
+}
+
+.array-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.array-row-space {
+  margin-top: 18px;
+}
+
+/* Array cell */
+
+.array-cell {
+  color: #f9ebe0;
+  background-color: #0e0d0d;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-family: "Arial", sans-serif;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.array-cell-small {
+  height: 54px;
+  width: 140px;
+}
+
+.array-cell-large {
+  height: 76px;
+  width: 150px;
+}
+
+.array-cell-label {
+  height: 48px;
+}
+
+.array-cell-label-s {
+  width: 82px;
+}
+
+.array-cell-label-m {
+  width: 82px;
+}
+
+.array-cell-label-l {
+  width: 124px;
+}
+
+.array-cell-label-xl {
+  width: 230px;
+}
+
+.array-cell.array-cell-no-border {
+  border: none;
+}
+
+.array-cell-label-calendar {
+  position: relative;
+}
+
+.array-cell-label-calendar > .array-cell {
+  padding-right: 20px;
+  display: inline-block;
+}
+
+.array-cell-label-calendar:after {
+  content: "📅";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  line-height: 28px;
+  font-size: 20px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.array-cell.dropdown {
+  align-items: flex-start;
+}
+
+.array-cell.dropdown .dropdown-button {
+  background-color: #0e0d0d;
+}
+
+.array-cell.dropdown .dropdown-container {
+  margin-top: -6px;
+}
+
+.array-blue .array-cell.dropdown .dropdown-container {
+  border: solid 1px #3131b8;
+}
+
+.array-purple .array-cell.dropdown .dropdown-container {
+  border: solid 1px #b137e9;
+}
+
+.array-cell.dropdown .dropdown-container {
+  width: 100%;
+  min-height: 100%;
+}
+
+.array-blue
+  .array-cell.dropdown
+  .dropdown-container:hover
+  span.dropdown-button {
+  background-color: #3131b8;
+}
+
+.array-purple
+  .array-cell.dropdown
+  .dropdown-container:hover
+  span.dropdown-button {
+  background-color: #b137e9;
+}
+
+.array-cell.dropdown span.dropdown-button {
+  border: none;
+  width: auto;
+  line-height: 74px;
+  height: 74px;
+}
+
+.array-blue .array-cell.dropdown .dropdown-button-reverse {
+  border: solid 1px #3131b8;
+}
+
+.array-purple .array-cell.dropdown .dropdown-button-reverse {
+  border: solid 1px #b137e9;
+}
+
+/* Array search */
+.array-with-search .search-bar {
+  margin-bottom: 14px;
+}
+
+/* Search bar */
+.search-bar {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.search-bar-input {
+  color: #f9ebe0;
+  background-color: #0e0d0d;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 14px;
+  height: 39px;
+  padding: 0 60px 0 14px;
+  line-height: 39px;
+  font-family: "Arial", sans-serif;
+  border: solid 1px #3131b8;
+  width: 100%;
+}
+
+.search-bar-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 29px;
+}

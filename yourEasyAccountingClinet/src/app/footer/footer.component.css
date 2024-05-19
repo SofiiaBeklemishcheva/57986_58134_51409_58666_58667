@@ -1,5 +1,8 @@
 .footer {
   padding: 25px 30px;
+  position: absolute;
+  bottom: -1;
+  width: 100%;
 }
 
 .footer-authors {
