@@ -1,0 +1,14 @@
+.header {
+  background-color: #0e0d0d;
+  display: flex;
+  height: 117px;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-container-right {
+  display: flex;
+}
+.header-container-right > .button,
+.header-container-right > .dropdown-container {
+  margin-left: 18px;
+}
