@@ -13,6 +13,11 @@
     border: solid 1px #B137E9;
 }
 
+.array-purple-borderless,
+.array-blue-borderless {
+    padding: 0;
+}
+
 .array-purple .array-cell,
 .array-purple-borderless .array-cell {
     border: solid 1px #B137E9;
@@ -21,6 +26,11 @@
 .array-purple .label-header,
 .array-purple-borderless .label-header {
     background-color: #B137E9;
+}
+
+.array-purple .label-small,
+.array-purple-borderless .label-small {
+    color: #B137E9;
 }
 
 .array-blue {
@@ -35,6 +45,11 @@
 .array-blue .label-header,
 .array-blue-borderless .label-header {
     background-color: #3131B8;
+}
+
+.array-blue .label-small,
+.array-blue-borderless .label-small {
+    color: #3131B8;
 }
 
 .array-container {

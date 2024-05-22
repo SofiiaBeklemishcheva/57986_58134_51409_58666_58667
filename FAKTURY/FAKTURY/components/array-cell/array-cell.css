@@ -13,6 +13,12 @@
     align-items: center;
 }
 
+.array-cell-extra-small {
+    height: 35px;
+    min-height: 30px;
+    line-height: 30px;
+}
+
 .array-cell-small {
     height: 54px;
     width: 140px;

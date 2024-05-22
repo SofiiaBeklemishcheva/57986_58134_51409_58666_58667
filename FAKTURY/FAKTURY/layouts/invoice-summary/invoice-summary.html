@@ -1,0 +1,63 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../layouts/universal.css">
+<link rel="stylesheet" href="../../components/universal-input/universal-input.css">
+<link rel="stylesheet" href="../../components/label/label.css">
+<link rel="stylesheet" href="../../components/array/array.css">
+<link rel="stylesheet" href="../../components/button/button.css">
+<link rel="stylesheet" href="../../components/array-cell/array-cell.css">
+<link rel="stylesheet" href="invoice-summary.css">
+
+<section class="invoice-summary">
+    <div class="array array-blue-borderless">
+        <span class="label label-small">Podsumowanie</span>
+        <div class="array-container">
+            <!--PopUp-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Wystawił:</label>
+                <input class="universal-input-input" type="text" id="name-input" name="name-input" readonly/>
+                <span class="universal-input-input-popup"></span>
+            </div>
+
+            <!--PopUp-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Odebrał:</label>
+                <input class="universal-input-input" type="text" id="name-input" name="name-input" readonly/>
+                <span class="universal-input-input-popup"></span>
+            </div>
+
+            <!--Textarea-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Uwagi:</label>
+                <textarea class="universal-input-input universal-input-input-textarea" id="name-input" name="name-input" rows="4"></textarea>
+            </div>
+
+            <!--Date-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Termin płatności:</label>
+                <input class="universal-input-input universal-input-input-calendar" type="date" id="name-input" name="name-input"/>
+            </div>
+
+            <!--Row-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Forma płatności:</label>
+                <span class="array-cell array-cell-extra-small array-cell-label-l">Gotówka:</span>
+                <span class="array-cell array-cell-extra-small array-cell-label-l"></span>
+                <span class="array-cell array-cell-extra-small array-cell-label-l">Karta:</span>
+                <span class="array-cell array-cell-extra-small array-cell-label-l"></span>
+                <span class="array-cell array-cell-extra-small array-cell-label-l">Przelew:</span>
+                <span class="array-cell array-cell-extra-small array-cell-label-l"></span>
+            </div>
+
+            <!--Date-->
+            <div class="universal-input-container">
+                <label class="universal-input-label" for="name-input">Data zapłaty:</label>
+                <input class="universal-input-input universal-input-input-calendar" type="date" id="name-input" name="name-input"/>
+            </div>
+        </div>
+
+        <div class="array-row array-row-space">
+            <span class="button">Zapisz</span>
+            <span class="button">Drukuj</span>
+        </div>
+    </div>
+</section>

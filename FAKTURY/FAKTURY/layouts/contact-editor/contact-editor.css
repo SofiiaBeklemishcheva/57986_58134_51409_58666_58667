@@ -1,0 +1,67 @@
+.contact-editor > .array {
+    margin: 55px auto 75px;
+    width: 1306px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 120px;
+    border: solid 1px #3131B8;
+    border-radius: 20px;
+}
+
+.contact-editor-data-form {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.contact-editor-data-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contact-editor .label-header {
+    width: calc(100% - 180px);
+}
+
+.contact-editor-data-column {
+    display: flex;
+    align-items: center;
+}
+
+.contact-editor-data-column:first-of-type {
+    margin-left: 90px;
+}
+
+.contact-editor-data-column:last-of-type {
+    margin-right: 90px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+}
+
+.contact-editor .text-input-container {
+    margin-bottom: 12px;
+}
+
+.contact-editor .contact-editor-data-form .label-header {
+    width: calc(100% - 500px);
+    background-color: #B137E9;
+    margin-top: 30px;
+    margin-bottom: 6px;
+}
+
+.contact-editor .checkbox-input-container {
+    width: calc(100% - 500px);
+    margin-top: 12px;
+}
+
+.contact-editor-data-save-container {
+    width: calc(100% - 180px);
+    text-align: right;
+    margin-top: 30px;
+}

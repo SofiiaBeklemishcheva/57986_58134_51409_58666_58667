@@ -1,0 +1,28 @@
+.contact-images > .array {
+    margin: 55px auto 75px;
+    width: 1306px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 120px;
+    border: solid 1px #3131B8;
+    border-radius: 20px;
+}
+
+.contact-images-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.contact-images-row:last-of-type {
+    margin-bottom: 0;
+}
+
+.contact-images-row > .person-tile-container {
+    margin-right: 60px;
+}
+
+.contact-images-row > .person-tile-container:last-of-type {
+    margin-right: 0;
+}

@@ -1,0 +1,24 @@
+.invoice-summary {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 1306px;
+    justify-content: space-between;
+}
+
+.invoice-summary .array,
+.invoice-summary .array-container {
+    width: 100%;
+}
+
+.invoice-summary .universal-input-container {
+    margin-bottom: 12px;
+}
+
+.invoice-summary .universal-input-container .array-cell:nth-child(2n + 1) {
+    margin-right: 30px;
+}
+
+.invoice-summary .array .array-row-space .button:first-of-type {
+    margin-right: 30px;
+}

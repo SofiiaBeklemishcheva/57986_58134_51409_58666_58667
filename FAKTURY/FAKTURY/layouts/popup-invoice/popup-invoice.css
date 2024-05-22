@@ -1,0 +1,38 @@
+.popup-invoice {
+    width: 1000px;
+    position: fixed;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup-invoice .array-row {
+    min-height: 35px;
+}
+
+.popup-invoice .array-purple,
+.popup-invoice .array-container {
+    width: 100%;
+}
+
+.popup-invoice .array-cell-label-custom {
+    width: 100%;
+}
+
+.popup-invoice .universal-input-input {
+    min-height: 35px;
+    border-color: #B137E9;
+}
+
+.popup-invoice .array-row {
+    position: relative;
+}
+
+.popup-invoice .close:after {
+    content: "✖";
+    position: absolute;
+    right: 14px;
+    top: -16px;
+    cursor: pointer;
+}

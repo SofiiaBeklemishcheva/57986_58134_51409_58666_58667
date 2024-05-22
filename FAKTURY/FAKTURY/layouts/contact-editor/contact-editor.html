@@ -1,0 +1,65 @@
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="../../layouts/universal.css">
+<link rel="stylesheet" href="../../components/text-input/text-input.css">
+<link rel="stylesheet" href="../../components/checkbox-input/checkbox-input.css">
+<link rel="stylesheet" href="../../components/label/label.css">
+<link rel="stylesheet" href="contact-editor.css">
+<link rel="stylesheet" href="../../components/array/array.css">
+<link rel="stylesheet" href="../../components/button/button.css">
+<link rel="stylesheet" href="../../components/person-tile-small/person-tile-small.css">
+
+<section class="contact-editor">
+    <div class="array array-blue">
+        <span class="label label-header ">Dane użytkownika</span>
+        <form class="contact-editor-data-form" action="#" method="post">
+            <div class="contact-editor-data-container">
+                <div class="contact-editor-data-column">
+                    <div class="person-tile-small-container">
+                        <img class="person-tile-small-photo" src="../../assets/person.png" alt="Imię i Nazwisko">
+                    </div>
+                </div>
+                <div class="contact-editor-data-column">
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-album">Numer albumu:</label>
+                        <input class="text-input-input" type="text" id="name-album" name="name-album"/>
+                    </div>
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-input">Imię:</label>
+                        <input class="text-input-input" type="text" id="name-input" name="name-input"/>
+                    </div>
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-surname">Nazwisko:</label>
+                        <input class="text-input-input" type="text" id="name-surname" name="name-surname"/>
+                    </div>
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-email">E-mail:</label>
+                        <input class="text-input-input" type="text" id="name-email" name="name-email"/>
+                    </div>
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-login">Login:</label>
+                        <input class="text-input-input" type="text" id="name-login" name="name-login"/>
+                    </div>
+                    <div class="text-input-container">
+                        <label class="text-input-label" for="name-password">Hasło:</label>
+                        <input class="text-input-input" type="text" id="name-password" name="name-password"/>
+                    </div>
+                </div>
+            </div>
+            <span class="label label-header">Uprawnienia</span>
+            <label class="checkbox-input-container" for="invoice-issue">
+                <span class="checkbox-input-label">Wystawianie faktur:</span>
+                <input class="checkbox-input-input" type="checkbox" id="invoice-issue" name="invoice-issue"/>
+                <span class="checkbox-input-checkmark"></span>
+            </label>
+            <label class="checkbox-input-container" for="invoice-pay">
+                <span class="checkbox-input-label">Wprowadzanie faktur:</span>
+                <input class="checkbox-input-input" type="checkbox" id="invoice-pay" name="invoice-pay"/>
+                <span class="checkbox-input-checkmark"></span>
+            </label>
+            <div class="contact-editor-data-save-container">
+                <input class="contact-editor-data-save button" type="submit" value="Zapisz">
+            </div>
+        </form>
+    </div>
+</section>

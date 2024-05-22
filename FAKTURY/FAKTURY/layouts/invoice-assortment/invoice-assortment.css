@@ -1,0 +1,20 @@
+.invoice-assortment {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 1306px;
+    justify-content: space-between;
+}
+
+.invoice-assortment .array,
+.invoice-assortment .array-container {
+    width: 100%;
+}
+
+.invoice-assortment .array-cell-label-custom {
+    width: calc(100% - 82px - (124px * 5) - 230px);
+}
+
+.array-row-space .array-cell-label-xl:first-of-type {
+    margin-right: 12px;
+}
