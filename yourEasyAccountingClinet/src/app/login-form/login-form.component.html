@@ -2,15 +2,27 @@
   <section class="login-form">
     <div class="login-form-inner-container">
       <h1 class="login-form-header">Log-in</h1>
-      <form class="login-form-form" method="post" action="#">
+      <form
+        [formGroup]="signupForm"
+        class="login-form-form"
+        method="post"
+        action="#"
+        (ngSubmit)="onSubmit()"
+      >
         <label class="input-colored">
-          <input class="input-colored-input" type="text" placeholder="Log-in" />
+          <input
+            class="input-colored-input"
+            type="text"
+            placeholder="Log-in"
+            formControlName="username"
+          />
         </label>
         <label class="input-colored">
           <input
             class="input-colored-input"
             type="password"
             placeholder="Password"
+            formControlName="password"
           />
         </label>
         <input type="submit" class="button" value="Log-in" />
