@@ -33,5 +33,6 @@
     </div>
     <a class="button" routerLink="balanceSummary">bilans</a>
     <a class="button" href="#">kontakt</a>
+    <a class="button" *ngIf="user" (click)="logOut()">Wyloguj</a>
   </div>
 </header>

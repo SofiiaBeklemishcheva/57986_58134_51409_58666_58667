@@ -5,13 +5,39 @@ import { InvoicesSummaryComponent } from './invoices-summary/invoices-summary.co
 import { ObligationSummaryComponent } from './obligation-summary/obligation-summary.component';
 import { InvoiceInputComponent } from './invoice-input/invoice-input.component';
 import { AddInvoicePopupComponent } from './add-invoice-popup/add-invoice-popup.component';
+import { guardsGuard } from './shared/guards.guard';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent },
-  { path: 'balanceSummary', component: BalanceSummaryComponent },
-  { path: 'invoicesSummary', component: InvoicesSummaryComponent },
-  { path: 'obligationSummary', component: ObligationSummaryComponent },
-  { path: 'inputInvoice', component: InvoiceInputComponent },
-  { path: 'addInvoice', component: AddInvoicePopupComponent },
-  { path: 'home', component: InvoicesSummaryComponent },
+  {
+    path: 'balanceSummary',
+    component: BalanceSummaryComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'invoicesSummary',
+    component: InvoicesSummaryComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'obligationSummary',
+    component: ObligationSummaryComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'inputInvoice',
+    component: InvoiceInputComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'addInvoice',
+    component: AddInvoicePopupComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'home',
+    component: InvoicesSummaryComponent,
+    canActivate: [guardsGuard],
+  },
 ];

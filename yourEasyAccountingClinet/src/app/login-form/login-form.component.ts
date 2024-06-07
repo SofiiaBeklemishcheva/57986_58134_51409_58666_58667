@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   FormBuilder,
 } from '@angular/forms';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -15,7 +16,7 @@ import {
   styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent implements OnInit {
-  constructor() {
+  constructor(private auth: AuthService) {
     this.signupForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -23,7 +24,9 @@ export class LoginFormComponent implements OnInit {
   }
   signupForm: FormGroup;
 
-  onSubmit() {}
+  onSubmit() {
+    this.auth.logIn('test', 'hehe');
+  }
 
   ngOnInit() {}
 }
