@@ -6,6 +6,7 @@ import { ObligationSummaryComponent } from './obligation-summary/obligation-summ
 import { InvoiceInputComponent } from './invoice-input/invoice-input.component';
 import { AddInvoicePopupComponent } from './add-invoice-popup/add-invoice-popup.component';
 import { guardsGuard } from './shared/guards.guard';
+import { ContactComponent } from './contact/contact.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -38,6 +39,11 @@ export const routes: Routes = [
   {
     path: 'home',
     component: InvoicesSummaryComponent,
+    canActivate: [guardsGuard],
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
     canActivate: [guardsGuard],
   },
 ];
