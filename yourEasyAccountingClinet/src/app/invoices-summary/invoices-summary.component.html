@@ -8,6 +8,8 @@
       <input
         class="array-cell array-cell-label array-cell-label-xl"
         type="date"
+        [(ngModel)]="dateFrom"
+        name="dateFrom"
       />
     </label>
     <span class="array-cell array-cell-label array-cell-label-s">Do:</span>
@@ -15,9 +17,16 @@
       <input
         class="array-cell array-cell-label array-cell-label-xl"
         type="date"
+        name="dateTo"
+        [(ngModel)]="dateTo"
       />
     </label>
-    <input type="submit" class="button button-inline" value="Pobierz listę" />
+    <input
+      type="submit"
+      class="button button-inline"
+      value="Pobierz listę"
+      (click)="filtering()"
+    />
   </form>
 
   <div class="array array-blue">
@@ -33,33 +42,41 @@
         <span class="array-cell array-cell-large">Status</span>
         <span class="array-cell array-cell-large array-cell-no-border"></span>
       </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
-        <span class="array-cell array-cell-large"></span>
+      <div *ngFor="let invoice of invoices" class="array-row">
+        <span class="array-cell array-cell-large">{{
+          invoice.issueDate.toLocaleString()
+        }}</span>
+        <span class="array-cell array-cell-large">{{
+          invoice.invoiceNum
+        }}</span>
+        <span class="array-cell array-cell-large">{{ invoice.clientID }}</span>
+        <span class="array-cell array-cell-large">{{
+          invoice.dueDate.toLocaleString()
+        }}</span>
+        <span class="array-cell array-cell-large">{{ invoice.netPrice }}</span>
+        <span class="array-cell array-cell-large">{{
+          invoice.netPrice + invoice.netPrice * invoice.VAT
+        }}</span>
+        <span class="array-cell array-cell-large">{{
+          invoice.dueDate | dueDateStatus
+        }}</span>
         <div class="array-cell array-cell-large dropdown">
-          <div class="dropdown-container">
+          <div class="dropdown-container" style="border: none">
             <span class="dropdown-button">Zarządzaj</span>
             <a
               class="dropdown-button dropdown-button-reverse"
-              style="margin-top: 1.6cm"
-              href="#"
-              >Edytuj</a
+              style="margin-top: 1.6cm; z-index: 999; position: absolute"
+            >
+              Edytuj</a
             >
             <a
               class="dropdown-button dropdown-button-reverse"
-              href="#"
-              style="margin-top: 3.2cm"
+              style="margin-top: 3.2cm; z-index: 999; position: absolute"
               >Drukuj</a
             >
             <a
               class="dropdown-button dropdown-button-reverse"
-              href="#"
-              style="margin-top: 4.8cm"
+              style="margin-top: 4.8cm; z-index: 999; position: absolute"
               >Wyślij mailem</a
             >
           </div>
