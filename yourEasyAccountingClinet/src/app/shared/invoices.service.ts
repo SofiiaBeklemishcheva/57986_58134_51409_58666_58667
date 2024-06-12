@@ -27,6 +27,17 @@ export class InvoicesService {
       dueDate: new Date('12/05/2000'),
       invoiceType: 'vat',
       issuePlace: 'ostroleka',
+      deliveryMethod: '',
+      reciver: '',
+      payer: '',
+      seller: '',
+      assName: '',
+      assQty: 0,
+      assjm: '',
+      issuedBy: '',
+      recived: '',
+      comments: '',
+      payDate: new Date('12/08/2000'),
     },
     {
       ID: 2,
@@ -43,6 +54,17 @@ export class InvoicesService {
       dueDate: new Date('12/08/2000'),
       invoiceType: 'vat',
       issuePlace: 'wroclaw',
+      deliveryMethod: '',
+      reciver: '',
+      payer: '',
+      seller: '',
+      assName: '',
+      assQty: 0,
+      assjm: '',
+      issuedBy: '',
+      recived: '',
+      comments: '',
+      payDate: new Date('12/08/2000'),
     },
   ];
   invoicesChange = new BehaviorSubject<Invoice[]>(this.invoices.slice());
@@ -58,5 +80,12 @@ export class InvoicesService {
     this.invoicesChange.next(this.invoices.slice());
   }
 
+  getInvoiceNextIndex() {
+    if (this.invoices.length > 0) {
+      return this.invoices[this.invoices.length - 1].ID + 1;
+    } else {
+      return 1;
+    }
+  }
   updateInvoice() {}
 }

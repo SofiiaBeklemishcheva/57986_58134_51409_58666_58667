@@ -1,111 +1,258 @@
-<section class="popup-invoice">
-  <div class="array array-purple">
-    <form class="array-container" action="#" method="post">
-      <div class="array-row">
-        <span class="close"></span>
+<form [formGroup]="addInvoiceForm" (ngSubmit)="onSubmit()">
+  <section class="invoice-input">
+    <!--Text-->
+
+    <div class="universal-input-container">
+      <label class="universal-input-label" for="name-input"
+        >Numer faktury:</label
+      >
+      <input
+        class="universal-input-input"
+        type="number"
+        id="name-input"
+        formControlName="invoiceNum"
+      />
+    </div>
+
+    <!--Date-->
+    <div class="universal-input-container">
+      <label class="universal-input-label" for="name-input"
+        >Data wystawienia:</label
+      >
+      <input
+        class="universal-input-input universal-input-input-calendar"
+        type="date"
+        id="name-input"
+        formControlName="issueDate"
+      />
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label" for="name-input"
+        >Miejsce wystawienia:</label
+      >
+      <input
+        class="universal-input-input"
+        type="text"
+        id="name-input"
+        formControlName="issuePlace"
+      />
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label" for="name-input"
+        >Sposób dostawy:</label
+      >
+      <input
+        class="universal-input-input"
+        type="text"
+        id="name-input"
+        formControlName="deliveryMethod"
+      />
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label" for="name-input">Nabywca:</label>
+      <div class="dropdown-container">
+        <select class="select">
+          <option *ngFor="let vendor of vendors" (click)="onSelectClientID()">
+            {{ vendor.name }}
+          </option>
+        </select>
       </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Nazwa:</label>
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input"
-            >Pełna nazwa:</label
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label">Odbiorca:</label>
+      <input
+        class="universal-input-input"
+        type="text"
+        id="name-input"
+        formControlName="reciver"
+      />
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label">Płatnik:</label>
+      <input
+        class="universal-input-input"
+        type="text"
+        id="name-input"
+        formControlName="payer"
+      />
+    </div>
+
+    <!--Text-->
+    <div class="universal-input-container">
+      <label class="universal-input-label">Sprzedawca:</label>
+      <input
+        class="universal-input-input"
+        type="text"
+        id="name-input"
+        formControlName="seller"
+      />
+    </div>
+  </section>
+
+  <section class="invoice-assortment" style="scale: 1.1">
+    <div class="array array-purple-borderless">
+      <span class="label label-small">Asortyment</span>
+      <div class="array-container">
+        <div class="array-row">
+          <span
+            class="array-cell array-cell-extra-small array-cell-label-custom"
+            >Nazwa</span
           >
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Ilość</span
+          >
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >J. m.</span
+          >
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Cena netto</span
+          >
+
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Vat (%)</span
+          >
+        </div>
+        <div class="array-row">
           <input
-            class="universal-input-input"
+            class="array-cell array-cell-extra-small array-cell-label-custom"
             type="text"
-            id="name-input"
-            name="name-input"
+            formControlName="assName"
+          />
+          <input
+            class="array-cell array-cell-extra-small array-cell-label-l"
+            formControlName="assQty"
+            type="number"
+          />
+          <input
+            class="array-cell array-cell-extra-small array-cell-label-l"
+            formControlName="assJm"
+            type="text"
+          />
+          <input
+            class="array-cell array-cell-extra-small array-cell-label-l"
+            formControlName="netPrice"
+            type="number"
+          />
+          <input
+            class="array-cell array-cell-extra-small array-cell-label-l"
+            formControlName="VAT"
+            type="number"
           />
         </div>
       </div>
-      <div class="array-row">
+    </div>
+  </section>
+
+  <section class="invoice-summary">
+    <div class="array array-blue-borderless">
+      <span class="label label-small">Podsumowanie</span>
+      <div class="array-container">
         <!--Text-->
         <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">NIP:</label>
+          <label class="universal-input-label">Wystawił:</label>
           <input
             class="universal-input-input"
             type="text"
             id="name-input"
-            name="name-input"
+            formControlName="issuedBy"
           />
         </div>
-      </div>
-      <div class="array-row">
+
         <!--Text-->
         <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Adres:</label>
+          <label class="universal-input-label">Odebrał:</label>
           <input
             class="universal-input-input"
             type="text"
             id="name-input"
-            name="name-input"
+            formControlName="recived"
           />
         </div>
-      </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Regon:</label>
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Telefon:</label>
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">E-mail:</label>
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
-      <div class="array-row">
+
         <!--Textarea-->
         <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Uwagi:</label>
+          <label class="universal-input-label">Uwagi:</label>
           <textarea
             class="universal-input-input universal-input-input-textarea"
             id="name-input"
-            name="name-input"
+            formControlName="comments"
             rows="4"
           ></textarea>
+        </div>
+
+        <!--Date-->
+        <div class="universal-input-container">
+          <label class="universal-input-label">Termin płatności:</label>
+          <input
+            class="universal-input-input universal-input-input-calendar"
+            type="date"
+            id="name-input"
+            formControlName="dueDate"
+          />
+        </div>
+
+        <!--Row-->
+        <div class="universal-input-container">
+          <label class="universal-input-label" for="name-input"
+            >Forma płatności:</label
+          >
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Gotówka:</span
+          >
+          <input
+            class="custom-checkbox"
+            type="checkbox"
+            id="invoice-issue"
+            formControlName="cash"
+          />
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Karta:</span
+          >
+          <input
+            class="custom-checkbox"
+            type="checkbox"
+            id="invoice-issue"
+            formControlName="card"
+          />
+          <span class="array-cell array-cell-extra-small array-cell-label-l"
+            >Przelew:</span
+          >
+          <input
+            class="custom-checkbox"
+            type="checkbox"
+            id="invoice-issue"
+            formControlName="bank"
+          />
+        </div>
+
+        <!--Date-->
+        <div class="universal-input-container">
+          <label class="universal-input-label" for="name-input"
+            >Data zapłaty:</label
+          >
+          <input
+            class="universal-input-input universal-input-input-calendar"
+            type="date"
+            id="name-input"
+            formControlName="payDate"
+          />
         </div>
       </div>
 
       <div class="array-row array-row-space">
-        <input type="submit" class="button" value="Zapisz" />
+        <button class="button" type="submit">Zapisz</button>
+        <span class="button">Drukuj</span>
       </div>
-    </form>
-  </div>
-</section>
+    </div>
+  </section>
+</form>

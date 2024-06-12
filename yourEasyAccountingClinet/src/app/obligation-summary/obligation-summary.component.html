@@ -1,107 +1,96 @@
-<section class="three-arrays" style="scale: 0.9">
-  <div class="array array-blue">
-    <span class="label label-header">Zobowiazania wobec kontrahentów</span>
-    <div class="array-container">
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="array array-purple">
-    <span class="label label-header">Zobowiazania wobec kontrahentów</span>
-    <div class="array-container">
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nr. Faktury</span>
-        <span class="array-cell array-cell-small">Termin</span>
-        <span class="array-cell array-cell-small">Podmiot</span>
-        <span class="array-cell array-cell-small">Brutto</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="array array-blue array-with-search">
-    <span class="label label-header">Zobowiazania wobec kontrahentów</span>
-    <div class="array-container">
-      <label class="search-bar">
-        <input class="search-bar-input" placeholder="Wyszukaj po nazwie" />
-        <img
-          class="search-bar-icon"
-          src="../../assets/search.png"
-          alt="search"
+<div style="display: flex; justify-content: center; align-items: center">
+  <section class="invoices-summary">
+    <form class="filters-general array-purple-borderless">
+      <span class="array-cell array-cell-label array-cell-label-xl"
+        >Wybierz zakres dat</span
+      >
+      <span class="array-cell array-cell-label array-cell-label-s">Od:</span>
+      <label class="array-cell-label-calendar">
+        <input
+          class="array-cell array-cell-label array-cell-label-xl"
+          type="date"
+          [(ngModel)]="dateFrom"
+          name="dateFrom"
         />
       </label>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nazwa</span>
-        <span class="array-cell array-cell-small">Email</span>
-        <span class="array-cell array-cell-small">Telefon</span>
+      <span class="array-cell array-cell-label array-cell-label-s">Do:</span>
+      <label class="array-cell-label-calendar">
+        <input
+          class="array-cell array-cell-label array-cell-label-xl"
+          type="date"
+          name="dateTo"
+          [(ngModel)]="dateTo"
+        />
+      </label>
+      <input
+        type="submit"
+        class="button button-inline"
+        value="Pobierz listę"
+        (click)="filtering()"
+      />
+    </form>
+
+    <div class="array array-purple">
+      <span class="label label-header">Faktury wystawione</span>
+      <div class="array-container">
+        <div class="array-row">
+          <span class="array-cell array-cell-large">Data wystawienia</span>
+          <span class="array-cell array-cell-large">Numer faktury</span>
+          <span class="array-cell array-cell-large">Podmiot</span>
+          <span class="array-cell array-cell-large">Termin</span>
+          <span class="array-cell array-cell-large">Netto</span>
+          <span class="array-cell array-cell-large">Brutto</span>
+          <span class="array-cell array-cell-large">Status</span>
+          <span class="array-cell array-cell-large array-cell-no-border"></span>
+        </div>
+        <div *ngFor="let invoice of invoices" class="array-row">
+          <span class="array-cell array-cell-large">{{
+            invoice.issueDate.toLocaleString()
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.invoiceNum
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.clientID
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.dueDate.toLocaleString()
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.netPrice
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.netPrice + invoice.netPrice * invoice.VAT
+          }}</span>
+          <span class="array-cell array-cell-large">{{
+            invoice.dueDate | dueDateStatus
+          }}</span>
+          <div class="array-cell array-cell-large dropdown">
+            <div class="dropdown-container" style="border: none">
+              <span class="dropdown-button">Zarządzaj</span>
+              <a
+                class="dropdown-button dropdown-button-reverse"
+                style="margin-top: 1.6cm; z-index: 999; position: absolute"
+              >
+                Edytuj</a
+              >
+              <a
+                class="dropdown-button dropdown-button-reverse"
+                style="margin-top: 3.2cm; z-index: 999; position: absolute"
+                >Drukuj</a
+              >
+              <a
+                class="dropdown-button dropdown-button-reverse"
+                style="margin-top: 4.8cm; z-index: 999; position: absolute"
+                >Wyślij mailem</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nazwa</span>
-        <span class="array-cell array-cell-small">Email</span>
-        <span class="array-cell array-cell-small">Telefon</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nazwa</span>
-        <span class="array-cell array-cell-small">Email</span>
-        <span class="array-cell array-cell-small">Telefon</span>
-      </div>
-      <div class="array-row">
-        <span class="array-cell array-cell-small">Nazwa</span>
-        <span class="array-cell array-cell-small">Email</span>
-        <span class="array-cell array-cell-small">Telefon</span>
+      <div class="array-row array-row-space">
+        <span class="button">Pobierz listę</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

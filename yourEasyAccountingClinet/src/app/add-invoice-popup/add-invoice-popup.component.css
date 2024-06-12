@@ -1,38 +1,62 @@
-.popup-invoice {
-  width: 1000px;
-  position: fixed;
-  z-index: 10;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.invoice-input {
+  margin-top: 55px;
 }
 
-.popup-invoice .array-row {
-  min-height: 35px;
+.invoice-assortment {
+  margin-top: 30px;
 }
 
-.popup-invoice .array-purple,
-.popup-invoice .array-container {
-  width: 100%;
+.invoice-summary {
+  margin-top: 30px;
+  margin-bottom: 75px;
 }
-
-.popup-invoice .array-cell-label-custom {
-  width: 100%;
-}
-
-.popup-invoice .universal-input-input {
-  min-height: 35px;
-  border-color: #b137e9;
-}
-
-.popup-invoice .array-row {
-  position: relative;
-}
-
-.popup-invoice .close:after {
-  content: "✖";
-  position: absolute;
-  right: 14px;
-  top: -16px;
+.custom-checkbox {
+  appearance: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #0e0d0d;
+  border: solid #3131b8 1px;
   cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.custom-checkbox:checked {
+  background-color: #b137e9;
+}
+
+.custom-checkbox:hover {
+  border-color: darkblue;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  position: relative;
+  top: 10px;
+  left: 14px;
+  width: 12px;
+  height: 24px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  transform: rotate(45deg);
+}
+
+.select {
+  color: #f9ebe0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 5px 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #3131b8;
+  width: 2330%;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
