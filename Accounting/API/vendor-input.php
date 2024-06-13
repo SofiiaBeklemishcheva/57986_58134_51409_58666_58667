@@ -4,12 +4,10 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $database = "faktury";
 $username = "root";
-$password = "";
+$password = "root";
 
-// Dane o Vendor do wstawienia
-$vendorName = $_POST['name'];
-$vendorNIP = $_POST['NIP'];
-$vendorAddress = $_POST['address'];
+$json = file_get_contents('php://input');
+$data = json_decode($json, true); // Dekodowanie JSON do tablicy asocjacyjnej
 
 try {
     // Połączenie z bazą danych
@@ -21,9 +19,9 @@ try {
                            VALUES (:name, :nip, :address)");
 
     // Wiązanie wartości z parametrami zapytania SQL
-    $stmt->bindParam(':name', $vendorName, PDO::PARAM_STR);
-    $stmt->bindParam(':nip', $vendorNIP, PDO::PARAM_STR);
-    $stmt->bindParam(':address', $vendorAddress, PDO::PARAM_STR);
+    $stmt->bindParam(':name', $data->name, PDO::PARAM_STR);
+    $stmt->bindParam(':nip', $data->nip, PDO::PARAM_STR);
+    $stmt->bindParam(':address', $data->address, PDO::PARAM_STR);
 
     // Wykonanie zapytania SQL
     $stmt->execute();
@@ -35,4 +33,4 @@ try {
     // Obsługa błędów
     echo json_encode(["error" => "Connection failed: " . $e->getMessage()]);
 }
-?>
+

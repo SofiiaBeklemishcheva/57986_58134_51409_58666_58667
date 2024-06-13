@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $database = "faktury";
 $username = "root";
-$password = "";
+$password = "root";
 
 try {
     // Połączenie z bazą danych
@@ -51,4 +51,3 @@ try {
     // Obsługa błędów
     echo json_encode(["error" => "Connection failed: " . $e->getMessage()]);
 }
-?>

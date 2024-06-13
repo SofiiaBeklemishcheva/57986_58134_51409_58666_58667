@@ -1,34 +1,15 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    $host = "localhost";
-    $dbusername = "root";
-    $dbpassword = "";
-    $dbname = "faktury";
+use API\ConnectionController;
 
-    $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+require "ConnectionController.php";
+$dataBaseConnection = new ConnectionController();
 
-    $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
+// Takes raw data from the request
+$json = file_get_contents('php://input');
 
-    $result = $conn->query($query);
+// Converts it into a PHP object
+$data = json_decode($json);
 
-    if ($result) {
-        if ($result->num_rows == 1) {
-            //Login success
-            header("Location: options.php");
-            exit();
-        } else {
-            //Login failed
-            echo "Login failed :(";
-        }
-
-
-        $conn->close();
-    }
-}
+$dataBaseConnection->login($data->login, $data->password);

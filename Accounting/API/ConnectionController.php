@@ -26,34 +26,23 @@ class ConnectionController
         }
     }
 
-    public function getVisitType($age)
+    public function login($login, $password)
     {
         try {
-            $stmt = $this->conn->prepare("");
-            $stmt->bindValue(':age', $age, PDO::PARAM_STR);
+            $stmt = $this->conn->prepare("SELECT * FROM user WHERE UserName = :login AND Password = :password");
+            $stmt->bindValue(':login', $login, PDO::PARAM_STR);
+            $stmt->bindValue(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        /* foreach($stmt->fetchAll() as $v) {
-             echo $v;
-         }*/
-        print_r($result);
-    }
-
-    public function getLocalizationsWithType($type)
-    {
-        try {
-            $stmt = $this->conn->prepare("");
-            $stmt->bindValue(':type', $type, PDO::PARAM_STR);
-            $results = $stmt->execute();
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+        if (count($stmt->fetchAll())===1){
+            echo json_encode(["status" => "OK"]);
         }
-        return ($results);
+        else{
+            echo json_encode(["status" => ":("]);
+        }
     }
-
 
 
 }
