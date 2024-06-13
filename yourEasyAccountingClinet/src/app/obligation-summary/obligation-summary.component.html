@@ -45,22 +45,25 @@
         </div>
         <div *ngFor="let invoice of invoices" class="array-row">
           <span class="array-cell array-cell-large">{{
-            invoice.issueDate.toLocaleString()
+            invoice.issueDate.toLocaleDateString()
           }}</span>
           <span class="array-cell array-cell-large">{{
             invoice.invoiceNum
           }}</span>
           <span class="array-cell array-cell-large">{{
-            invoice.clientID
+            vendSer.getVendorById(invoice.clientID)?.name
           }}</span>
           <span class="array-cell array-cell-large">{{
-            invoice.dueDate.toLocaleString()
+            invoice.dueDate.toLocaleDateString()
           }}</span>
           <span class="array-cell array-cell-large">{{
-            invoice.netPrice
+            invoice.netPrice + "  " + invoice.currency
           }}</span>
           <span class="array-cell array-cell-large">{{
-            invoice.netPrice + invoice.netPrice * invoice.VAT
+            invoice.netPrice +
+              invoice.netPrice * invoice.VAT +
+              "  " +
+              invoice.currency
           }}</span>
           <span class="array-cell array-cell-large">{{
             invoice.dueDate | dueDateStatus
@@ -82,7 +85,8 @@
               <a
                 class="dropdown-button dropdown-button-reverse"
                 style="margin-top: 4.8cm; z-index: 999; position: absolute"
-                >Wyślij mailem</a
+                (click)="deleteInvoice(invoice)"
+                >Usuń</a
               >
             </div>
           </div>

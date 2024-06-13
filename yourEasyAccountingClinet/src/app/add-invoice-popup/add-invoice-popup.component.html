@@ -57,8 +57,8 @@
     <div class="universal-input-container">
       <label class="universal-input-label" for="name-input">Nabywca:</label>
       <div class="dropdown-container">
-        <select class="select">
-          <option *ngFor="let vendor of vendors" (click)="onSelectClientID()">
+        <select class="select" formControlName="vendorID">
+          <option *ngFor="let vendor of vendors" [value]="vendor.ID">
             {{ vendor.name }}
           </option>
         </select>
@@ -99,7 +99,7 @@
     </div>
   </section>
 
-  <section class="invoice-assortment" style="scale: 1.1">
+  <section class="invoice-assortment" style="scale: 1.1; margin-left: -0.1cm">
     <div class="array array-purple-borderless">
       <span class="label label-small">Asortyment</span>
       <div class="array-container">

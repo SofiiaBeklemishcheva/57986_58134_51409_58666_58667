@@ -1,6 +1,13 @@
 <section class="popup-invoice">
-  <div class="array array-purple">
-    <form class="array-container" action="#" method="post">
+  <div class="array array-purple" style="width: 50cm">
+    <form
+      class="array-container"
+      action="#"
+      method="post"
+      style="width: 30cm"
+      [formGroup]="addClient"
+      (submit)="onSubmit()"
+    >
       <div class="array-row">
         <span class="close"></span>
       </div>
@@ -13,23 +20,11 @@
             type="text"
             id="name-input"
             name="name-input"
+            formControlName="name"
           />
         </div>
       </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input"
-            >Pełna nazwa:</label
-          >
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
+      <div class="array-row"></div>
       <div class="array-row">
         <!--Text-->
         <div class="universal-input-container">
@@ -39,6 +34,7 @@
             type="text"
             id="name-input"
             name="name-input"
+            formControlName="NIP"
           />
         </div>
       </div>
@@ -51,21 +47,11 @@
             type="text"
             id="name-input"
             name="name-input"
+            formControlName="address"
           />
         </div>
       </div>
-      <div class="array-row">
-        <!--Text-->
-        <div class="universal-input-container">
-          <label class="universal-input-label" for="name-input">Regon:</label>
-          <input
-            class="universal-input-input"
-            type="text"
-            id="name-input"
-            name="name-input"
-          />
-        </div>
-      </div>
+      <div class="array-row"></div>
       <div class="array-row">
         <!--Text-->
         <div class="universal-input-container">
@@ -75,6 +61,7 @@
             type="text"
             id="name-input"
             name="name-input"
+            formControlName="phone"
           />
         </div>
       </div>
@@ -87,6 +74,7 @@
             type="text"
             id="name-input"
             name="name-input"
+            formControlName="email"
           />
         </div>
       </div>
@@ -99,12 +87,13 @@
             id="name-input"
             name="name-input"
             rows="4"
+            formControlName="comments"
           ></textarea>
         </div>
       </div>
 
       <div class="array-row array-row-space">
-        <input type="submit" class="button" value="Zapisz" />
+        <button class="button" type="submit">Zapisz</button>
       </div>
     </form>
   </div>

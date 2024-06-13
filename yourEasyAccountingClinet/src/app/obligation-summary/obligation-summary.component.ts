@@ -5,6 +5,7 @@ import { InvoicesService } from '../shared/invoices.service';
 import { DueDatePipe } from '../shared/dueDate.pipe';
 import { NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { VendorService } from '../shared/vendor.service';
 
 @Component({
   selector: 'app-obligation-summary',
@@ -17,7 +18,10 @@ export class ObligationSummaryComponent {
   dateFrom!: Date;
   dateTo!: Date;
 
-  constructor(private invoicesSer: InvoicesService) {}
+  constructor(
+    private invoicesSer: InvoicesService,
+    public vendSer: VendorService
+  ) {}
   invoices: Invoice[] = [];
   invoicesSub!: Subscription;
 
@@ -26,20 +30,25 @@ export class ObligationSummaryComponent {
     const dateTo: Date = new Date(this.dateTo);
     const initialInvoices = this.invoicesSer.getInvoices();
     const filteredInvoices = initialInvoices.filter((val) => {
-      console.log(val.issueDate.getTime());
-      console.log(dateFrom.getTime());
       return (
-        val.issueDate.getTime() >= dateFrom.getTime() &&
-        val.issueDate.getTime() <= dateTo.getTime()
+        val.issueDate.getTime() >= dateFrom.getTime() - 6400000 &&
+        val.issueDate.getTime() <= dateTo.getTime() + 6400000 &&
+        val.invoiceType === 'wystawione'
       );
     });
     this.invoices = filteredInvoices;
   }
 
+  deleteInvoice(invoice: Invoice) {
+    this.invoicesSer.deleteInvoice(invoice);
+  }
+
   ngOnInit(): void {
     this.invoicesSub = this.invoicesSer.invoicesChange.subscribe(
       (vInvoices) => {
-        this.invoices = vInvoices;
+        this.invoices = vInvoices.filter((val) => {
+          return val.invoiceType === 'wystawione';
+        });
       }
     );
   }
