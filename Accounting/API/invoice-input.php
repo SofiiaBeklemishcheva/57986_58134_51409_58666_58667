@@ -5,57 +5,87 @@ $username = "root";
 $password = "";
 
 try {
+    // Tworzenie połączenia
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-    // set the PDO error mode to exception
-
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    //$_POST["rules"];
-    $date = "2024-01-01";
-    $hour = "14:00:00";
-    $rules = "0";
-    if (array_key_exists("rules", $_POST) && ($_POST["rules"] == "on")) {
-        $rules = "1";
-//        echo "1";
-    }
-
-    $stmt = $conn->prepare("INSERT INTO `fx`(`Nr_Faktury`, `Data_wystawienia`, `Metoda_platnosci`, `Waluta`, `Cena_netto`, `Stawka_VAT`, `ID_wystawiajacy`,`ID_podmiot`,`Nazwa_towaru`,`Ilość`,`Termin_platnosci`) VALUES (
+    // Przygotowanie zapytania SQL
+    $stmt = $conn->prepare("INSERT INTO fx (
+        Nr_Faktury, 
+        Data_wystawienia, 
+        Metoda_platnosci, 
+        Waluta, 
+        Cena_netto, 
+        Stawka_VAT, 
+        ID_wystawiajacy,
+        ID_podmiot,
+        Nazwa_towaru,
+        Ilość,
+        Termin_platnosci,
+        Typ_faktury,
+        Miejsce_wystawienia,
+        Dostawa,
+        Odbiorca,
+        Płacący,
+        Sprzedający,
+        Jednostka_miary,
+        Utworzony_przez,
+        Odebrano,
+        Komentarze,
+        Zapłacono_dnia
+    ) VALUES (
         :invoiceNum,
         :issueDate,
+        :paymentMethod,
+        :currency,
+        :netPrice,
+        :VAT,
+        :issuerID,
+        :clientID,
+        :materialName,
+        :amount,
+        :dueDate,
+        :invoiceType,
         :issuePlace,
         :deliveryMethod,
         :reciver,
         :payer,
         :seller,
-        :assName,
-        :assQty,
         :assJm,
-        :netPrice,
-        :VAT,
         :issuedBy,
         :recived,
         :comments,
-        :dueDate,
-        :cash,
-        :card,
-        :bank,
-        :payDate)");
-    $stmt->bindValue(':kindOfTest', $_POST['eyetest_kind'], PDO::PARAM_STR);
-    $stmt->bindValue(':place', $_POST['eyetest_localization'], PDO::PARAM_STR);
-    $stmt->bindValue(':date', $date, PDO::PARAM_STR);
-    $stmt->bindValue(':hour', $hour, PDO::PARAM_STR);
-    $stmt->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
-    $stmt->bindValue(':surname', $_POST['surname'], PDO::PARAM_STR);
-    $stmt->bindValue(':age', $_POST['age'], PDO::PARAM_STR);
-    $stmt->bindValue(':eMail', $_POST['mail'], PDO::PARAM_STR);
-    $stmt->bindValue(':phone', $_POST['number'], PDO::PARAM_STR);
-    $stmt->bindValue(':message', $_POST['message'], PDO::PARAM_STR);
-    $stmt->bindValue(':rules', $rules, PDO::PARAM_STR);
+        :payDate
+    )");
+
+    // Mapowanie zmiennych POST na parametry SQL
+    $stmt->bindParam(':invoiceNum', $_POST['invoiceNum'], PDO::PARAM_STR);
+    $stmt->bindParam(':issueDate', $_POST['issueDate'], PDO::PARAM_STR);
+    $stmt->bindParam(':paymentMethod', $_POST['paymentMethod'], PDO::PARAM_STR);
+    $stmt->bindParam(':currency', $_POST['currency'], PDO::PARAM_STR);
+    $stmt->bindParam(':netPrice', $_POST['netPrice'], PDO::PARAM_STR);
+    $stmt->bindParam(':VAT', $_POST['VAT'], PDO::PARAM_STR);
+    $stmt->bindParam(':issuerID', $_POST['issuerID'], PDO::PARAM_INT);
+    $stmt->bindParam(':clientID', $_POST['clientID'], PDO::PARAM_INT);
+    $stmt->bindParam(':materialName', $_POST['materialName'], PDO::PARAM_STR);
+    $stmt->bindParam(':amount', $_POST['amount'], PDO::PARAM_STR);
+    $stmt->bindParam(':dueDate', $_POST['dueDate'], PDO::PARAM_STR);
+    $stmt->bindParam(':invoiceType', $_POST['invoiceType'], PDO::PARAM_STR);
+    $stmt->bindParam(':issuePlace', $_POST['issuePlace'], PDO::PARAM_STR);
+    $stmt->bindParam(':deliveryMethod', $_POST['deliveryMethod'], PDO::PARAM_STR);
+    $stmt->bindParam(':reciver', $_POST['reciver'], PDO::PARAM_STR);
+    $stmt->bindParam(':payer', $_POST['payer'], PDO::PARAM_STR);
+    $stmt->bindParam(':seller', $_POST['seller'], PDO::PARAM_STR);
+    $stmt->bindParam(':assJm', $_POST['assJm'], PDO::PARAM_STR);
+    $stmt->bindParam(':issuedBy', $_POST['issuedBy'], PDO::PARAM_STR);
+    $stmt->bindParam(':recived', $_POST['recived'], PDO::PARAM_STR);
+    $stmt->bindParam(':comments', $_POST['comments'], PDO::PARAM_STR);
+    $stmt->bindParam(':payDate', $_POST['payDate'], PDO::PARAM_STR);
+
+    // Wykonanie zapytania
     $stmt->execute();
 
+    echo "OK";
 } catch (PDOException $e) {
-//    echo "Connection failed: " . $e->getMessage();
+    echo "Connection failed: " . $e->getMessage();
 }
-
-
-echo "OK";
