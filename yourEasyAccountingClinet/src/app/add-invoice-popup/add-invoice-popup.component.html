@@ -1,5 +1,5 @@
 <form [formGroup]="addInvoiceForm" (ngSubmit)="onSubmit()">
-  <section class="invoice-input">
+  <section class="invoice-input" style="width: 43cm">
     <!--Text-->
 
     <div class="universal-input-container">
@@ -57,7 +57,11 @@
     <div class="universal-input-container">
       <label class="universal-input-label" for="name-input">Nabywca:</label>
       <div class="dropdown-container">
-        <select class="select" formControlName="vendorID">
+        <select
+          class="select"
+          formControlName="vendorID"
+          style="width: 36.88cm"
+        >
           <option *ngFor="let vendor of vendors" [value]="vendor.ID">
             {{ vendor.name }}
           </option>
@@ -101,7 +105,7 @@
 
   <section class="invoice-assortment" style="scale: 1.1; margin-left: -0.1cm">
     <div class="array array-purple-borderless">
-      <span class="label label-small">Asortyment</span>
+      <span class="label label-small" style="margin-left: 9cm">Asortyment</span>
       <div class="array-container">
         <div class="array-row">
           <span
@@ -153,7 +157,7 @@
     </div>
   </section>
 
-  <section class="invoice-summary">
+  <section class="invoice-summary" style="margin-left: 5cm">
     <div class="array array-blue-borderless">
       <span class="label label-small">Podsumowanie</span>
       <div class="array-container">
