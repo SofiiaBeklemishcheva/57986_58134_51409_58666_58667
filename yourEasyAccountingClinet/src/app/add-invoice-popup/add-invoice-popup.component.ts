@@ -75,7 +75,7 @@ export class AddInvoicePopupComponent implements OnInit {
 
     let invoiceType: string;
     if (netPrice > 0) {
-      invoiceType = 'wystawiona';
+      invoiceType = 'wystawione';
     } else {
       invoiceType = 'do zapłaty';
     }

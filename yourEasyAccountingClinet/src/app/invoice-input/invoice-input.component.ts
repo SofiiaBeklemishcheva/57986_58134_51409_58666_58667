@@ -31,6 +31,7 @@ export class InvoiceInputComponent {
       comments: String(this.addClient.get('comments')?.value),
     });
     alert('Dodano podmiot');
+    this.addClient.reset();
   }
 
   addClient: FormGroup;
