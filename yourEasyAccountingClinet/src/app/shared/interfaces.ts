@@ -41,4 +41,6 @@ export interface Vendor {
   name: string;
   NIP: string;
   address: string;
+  phone: string;
+  comments: string;
 }

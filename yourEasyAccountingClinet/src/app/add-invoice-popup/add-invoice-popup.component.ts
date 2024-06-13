@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -10,15 +11,17 @@ import { Vendor } from '../shared/interfaces';
 import { NgFor } from '@angular/common';
 import { InvoicesService } from '../shared/invoices.service';
 import { AuthService } from '../shared/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-invoice-popup',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule, NgFor, FormsModule],
   templateUrl: './add-invoice-popup.component.html',
   styleUrl: './add-invoice-popup.component.css',
 })
-export class AddInvoicePopupComponent {
+export class AddInvoicePopupComponent implements OnInit {
+  selectedVendor: any;
   constructor(
     private vendorsService: VendorService,
     private invoiceService: InvoicesService,
@@ -45,25 +48,37 @@ export class AddInvoicePopupComponent {
       card: new FormControl(),
       bank: new FormControl(),
       payDate: new FormControl(),
+      vendorID: new FormControl(1),
     });
   }
-  vendors: Vendor[] = this.vendorsService.vendorsChange.value;
+  vendorsSub!: Subscription;
+  vendors: Vendor[] = [];
   addInvoiceForm: FormGroup;
 
   onSubmit() {
     let paymentMethod: string = '';
     if (this.addInvoiceForm.get('cash')) {
       paymentMethod = paymentMethod + 'cash ';
-    } else if (this.addInvoiceForm.get('cash')) {
+    }
+    if (this.addInvoiceForm.get('cash')) {
       paymentMethod = paymentMethod + 'card ';
-    } else if (this.addInvoiceForm.get('bank')) {
+    }
+    if (this.addInvoiceForm.get('bank')) {
       paymentMethod = paymentMethod + 'bank';
     }
 
     let netPrice: number =
       Number(this.addInvoiceForm.get('assQty')?.value) *
       Number(this.addInvoiceForm.get('netPrice')?.value);
+
     let VAT = Number(this.addInvoiceForm.get('VAT')?.value) / 100;
+
+    let invoiceType: string;
+    if (netPrice > 0) {
+      invoiceType = 'wystawiona';
+    } else {
+      invoiceType = 'do zapłaty';
+    }
 
     this.invoiceService.addInvoice([
       {
@@ -77,11 +92,11 @@ export class AddInvoicePopupComponent {
         netPrice: netPrice,
         VAT: VAT,
         issuerID: Number(this.authService.getUser()?.ID),
-        clientID: 0,
+        clientID: Number(this.addInvoiceForm.get('vendorID')?.value),
         materialName: String(this.addInvoiceForm.get('assName')?.value),
         amount: String(this.addInvoiceForm.get('assQty')?.value),
         dueDate: new Date(String(this.addInvoiceForm.get('dueDate')?.value)),
-        invoiceType: '1',
+        invoiceType: invoiceType,
         issuePlace: String(this.addInvoiceForm.get('issuePlace')?.value),
         deliveryMethod: String(
           this.addInvoiceForm.get('deliveryMethod')?.value
@@ -99,9 +114,13 @@ export class AddInvoicePopupComponent {
       },
     ]);
 
+    alert('Faktura dodana pomyślnie');
     this.addInvoiceForm.reset();
     console.log(this.invoiceService.getInvoices());
   }
-
-  onSelectClientID() {}
+  ngOnInit() {
+    this.vendorsSub = this.vendorsService.vendorsChange.subscribe((val) => {
+      this.vendors = val;
+    });
+  }
 }
