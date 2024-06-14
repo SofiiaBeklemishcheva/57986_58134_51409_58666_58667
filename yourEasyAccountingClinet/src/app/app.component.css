@@ -1,0 +1,27 @@
+.router-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.router-container > * {
+  position: absolute;
+  width: 100%;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.router-container > .ng-enter {
+  transform: translateX(100%);
+}
+
+.router-container > .ng-enter.ng-enter-active {
+  transform: translateX(0);
+}
+
+.router-container > .ng-leave {
+  transform: translateX(0);
+}
+
+.router-container > .ng-leave.ng-leave-active {
+  transform: translateX(-100%);
+}

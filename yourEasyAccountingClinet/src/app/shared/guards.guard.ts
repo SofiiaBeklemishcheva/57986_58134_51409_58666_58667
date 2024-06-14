@@ -11,7 +11,6 @@ export const guardsGuard: CanActivateFn = (route, state) => {
   if (currentUser !== null) {
     return true;
   } else {
-    alert('Log in required!');
     router.navigate(['login']);
     return false;
   }

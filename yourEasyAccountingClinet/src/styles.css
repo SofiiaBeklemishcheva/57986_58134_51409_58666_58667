@@ -573,11 +573,17 @@ body {
 }
 
 /* Fade */
-.fadeIn {
+.component-container {
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-.fadeIn-active {
+.component-container.enter {
   opacity: 1;
+  transform: translateX(0);
+}
+
+.component-container.leave {
+  opacity: 0;
+  transform: translateX(-100%);
 }

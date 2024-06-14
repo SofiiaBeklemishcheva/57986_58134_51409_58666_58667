@@ -1,0 +1,88 @@
+<section class="three-arrays">
+  <div class="array array-blue">
+    <span class="label label-header">Zobowiazania</span>
+    <div class="array-container">
+      <div class="array-row">
+        <span class="array-cell array-cell-small">Nr. Faktury</span>
+        <span class="array-cell array-cell-small">Termin</span>
+        <span class="array-cell array-cell-small">Podmiot</span>
+        <span class="array-cell array-cell-small">Brutto</span>
+      </div>
+      <div class="array-row" *ngFor="let invoice of outcomingInvoices">
+        <span class="array-cell array-cell-small">{{ invoice.ID }}</span>
+        <span class="array-cell array-cell-small">{{
+          invoice.issueDate.toLocaleDateString()
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          vendSer.getVendorById(invoice.clientID)?.name
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="array array-purple">
+    <span class="label label-header">Należności</span>
+    <div class="array-container">
+      <div class="array-row">
+        <span class="array-cell array-cell-small">Nr. Faktury</span>
+        <span class="array-cell array-cell-small">Termin</span>
+        <span class="array-cell array-cell-small">Podmiot</span>
+        <span class="array-cell array-cell-small">Brutto</span>
+      </div>
+      <div class="array-row" *ngFor="let invoice of incomingInvoices">
+        <span class="array-cell array-cell-small">{{ invoice.ID }}</span>
+        <span class="array-cell array-cell-small">{{
+          invoice.issueDate.toLocaleDateString()
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          vendSer.getVendorById(invoice.clientID)?.name
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="array array-blue array-with-search">
+    <span class="label label-header">Podmioty</span>
+    <div class="array-container">
+      <label class="search-bar">
+        <input
+          class="search-bar-input"
+          placeholder="Wyszukaj po nazwie"
+          [(ngModel)]="searchString"
+          (ngModelChange)="filterVendors()"
+        />
+        <img
+          class="search-bar-icon"
+          src="../../assets/search.png"
+          alt="search"
+        />
+      </label>
+      <div class="array-row">
+        <span class="array-cell array-cell-small">Nazwa podmiotu</span>
+        <span class="array-cell array-cell-small">Telefon</span>
+        <span class="array-cell array-cell-small">NIP</span>
+        <span
+          class="array-cell array-cell-small"
+          style="visibility: hidden"
+        ></span>
+      </div>
+      <div class="array-row" *ngFor="let vendor of vendors">
+        <span class="array-cell array-cell-small">{{ vendor.name }}</span>
+        <span class="array-cell array-cell-small">{{ vendor.phone }}</span>
+        <span class="array-cell array-cell-small">{{ vendor.NIP }}</span>
+        <a
+          class="array-cell array-cell-small"
+          style="cursor: pointer; background-color: rgb(255, 0, 0)"
+          (click)="deleteVendor(vendor)"
+          >Usuń</a
+        >
+      </div>
+    </div>
+  </div>
+</section>

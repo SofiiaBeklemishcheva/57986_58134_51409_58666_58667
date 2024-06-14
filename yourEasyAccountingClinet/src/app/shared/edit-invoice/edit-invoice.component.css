@@ -1,0 +1,62 @@
+.invoice-input {
+  margin-top: 55px;
+}
+
+.invoice-assortment {
+  margin-top: 30px;
+}
+
+.invoice-summary {
+  margin-top: 30px;
+  margin-bottom: 75px;
+}
+.custom-checkbox {
+  appearance: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #0e0d0d;
+  border: solid #3131b8 1px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.custom-checkbox:checked {
+  background-color: #b137e9;
+}
+
+.custom-checkbox:hover {
+  border-color: darkblue;
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  display: block;
+  position: relative;
+  top: 10px;
+  left: 14px;
+  width: 12px;
+  height: 24px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  transform: rotate(45deg);
+}
+
+.select {
+  color: #f9ebe0;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 5px 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #3131b8;
+  width: 2330%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}

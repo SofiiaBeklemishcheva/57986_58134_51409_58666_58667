@@ -1,60 +1,70 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormGroup,
+  FormControl,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
-import { VendorService } from '../shared/vendor.service';
-import { Vendor } from '../shared/interfaces';
-import { NgFor } from '@angular/common';
-import { InvoicesService } from '../shared/invoices.service';
-import { AuthService } from '../shared/auth.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { Invoice, Vendor } from '../interfaces';
+import { InvoicesService } from '../invoices.service';
+import { VendorService } from '../vendor.service';
+import { CommonModule, formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-invoice-popup',
+  selector: 'app-edit-invoice',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, FormsModule],
-  templateUrl: './add-invoice-popup.component.html',
-  styleUrl: './add-invoice-popup.component.css',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './edit-invoice.component.html',
+  styleUrl: './edit-invoice.component.css',
 })
-export class AddInvoicePopupComponent implements OnInit {
+export class EditInvoiceComponent implements OnInit {
   selectedVendor: any;
+  invoiceUnderEdit: Invoice;
   constructor(
     private vendorsService: VendorService,
     private invoiceService: InvoicesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
+    this.invoiceUnderEdit =
+      invoiceService.getInvoices()[invoiceService.invoiceIdUnderEdit];
     this.addInvoiceForm = new FormGroup({
-      invoiceNum: new FormControl(),
-      issueDate: new FormControl(),
-      issuePlace: new FormControl(),
-      deliveryMethod: new FormControl(),
-      reciver: new FormControl(),
-      payer: new FormControl(),
-      seller: new FormControl(),
-      assName: new FormControl(),
-      assQty: new FormControl(),
-      assJm: new FormControl(),
-      netPrice: new FormControl(),
-      VAT: new FormControl(),
-      issuedBy: new FormControl(),
-      recived: new FormControl(),
-      comments: new FormControl(),
-      dueDate: new FormControl(),
+      invoiceNum: new FormControl(this.invoiceUnderEdit.invoiceNum),
+      issueDate: new FormControl(
+        formatDate(
+          new Date(this.invoiceUnderEdit.issueDate),
+          'yyyy-MM-dd',
+          'en'
+        )
+      ),
+      issuePlace: new FormControl(this.invoiceUnderEdit.issuePlace),
+      deliveryMethod: new FormControl(this.invoiceUnderEdit.deliveryMethod),
+      reciver: new FormControl(this.invoiceUnderEdit.reciver),
+      payer: new FormControl(this.invoiceUnderEdit.payer),
+      seller: new FormControl(this.invoiceUnderEdit.seller),
+      assName: new FormControl(this.invoiceUnderEdit.assName),
+      assQty: new FormControl(this.invoiceUnderEdit.assQty),
+      assJm: new FormControl(this.invoiceUnderEdit.assjm),
+      netPrice: new FormControl(this.invoiceUnderEdit.netPrice),
+      VAT: new FormControl(this.invoiceUnderEdit.VAT),
+      issuedBy: new FormControl(this.invoiceUnderEdit.issuedBy),
+      recived: new FormControl(this.invoiceUnderEdit.recived),
+      comments: new FormControl(this.invoiceUnderEdit.comments),
+      dueDate: new FormControl(
+        formatDate(new Date(this.invoiceUnderEdit.dueDate), 'yyyy-MM-dd', 'en')
+      ),
       cash: new FormControl(),
       card: new FormControl(),
       bank: new FormControl(),
-      payDate: new FormControl(),
+      payDate: new FormControl(
+        formatDate(new Date(this.invoiceUnderEdit.payDate), 'yyyy-MM-dd', 'en')
+      ),
       vendorID: new FormControl(1),
     });
   }
-  inProduction() {
-    alert('Funkcjonalność w trakcie tworzenia.');
-  }
-
   vendorsSub!: Subscription;
   vendors: Vendor[] = [];
   addInvoiceForm: FormGroup;
@@ -86,7 +96,7 @@ export class AddInvoicePopupComponent implements OnInit {
 
     this.invoiceService.addInvoice([
       {
-        ID: this.invoiceService.getInvoiceNextIndex(),
+        ID: this.invoiceUnderEdit.ID,
         invoiceNum: String(this.addInvoiceForm.get('invoiceNum')?.value),
         issueDate: new Date(
           String(this.addInvoiceForm.get('issueDate')?.value)
@@ -118,10 +128,14 @@ export class AddInvoicePopupComponent implements OnInit {
       },
     ]);
 
-    alert('Faktura dodana pomyślnie');
+    this.invoiceService.deleteInvoice(this.invoiceUnderEdit);
+    alert('Faktura edytowana pomyślnie');
     this.addInvoiceForm.reset();
+
+    this.router.navigate(['home']);
   }
   ngOnInit() {
+    this.invoiceService.isBeingEdited = false;
     this.vendorsSub = this.vendorsService.vendorsChange.subscribe((val) => {
       this.vendors = val;
     });

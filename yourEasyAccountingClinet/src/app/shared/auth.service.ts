@@ -11,16 +11,18 @@ export class AuthService {
   user = new BehaviorSubject<User | null>(null);
 
   logIn(login: string, password: string) {
-    this.user.next({
-      ID: 2,
-      albumId: 5,
-      name: login,
-      surname: 'Test',
-      nickname: 'Testowy',
-      access: 2,
-    });
-    if (this.user !== null) {
-      localStorage.setItem('user', JSON.stringify(this.user.value));
+    if (login === 'admin' && password === 'admin') {
+      this.user.next({
+        ID: 2,
+        albumId: 5,
+        name: login,
+        surname: 'Test',
+        nickname: 'Testowy',
+        access: 2,
+      });
+      if (this.user !== null) {
+        localStorage.setItem('user', JSON.stringify(this.user.value));
+      }
     }
   }
 
@@ -36,8 +38,6 @@ export class AuthService {
     } else {
       this.user.next(JSON.parse(String(user)));
     }
-
-    console.log(this.user.value);
   }
 
   getUser() {

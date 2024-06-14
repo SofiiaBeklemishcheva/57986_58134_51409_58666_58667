@@ -8,7 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 export class VendorService {
   invoices: any;
   constructor() {}
-
   private vendors: Vendor[] = [
     {
       ID: 1,
@@ -35,7 +34,7 @@ export class VendorService {
   }
 
   getVendor() {
-    this.vendors.slice();
+    return this.vendors.slice();
   }
 
   getVendorNextIndex() {
@@ -50,5 +49,13 @@ export class VendorService {
     return this.vendors.find((vendor) => {
       return vendor.ID == id;
     });
+  }
+
+
+  deleteVendor(vendor: Vendor) {
+    let index = this.vendors.indexOf(vendor);
+
+    this.vendors.splice(index, 1);
+    this.vendorsChange.next(this.vendors);
   }
 }

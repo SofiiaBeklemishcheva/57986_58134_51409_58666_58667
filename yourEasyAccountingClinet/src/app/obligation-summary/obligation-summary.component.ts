@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Invoice } from '../shared/interfaces';
 import { InvoicesService } from '../shared/invoices.service';
@@ -6,6 +6,7 @@ import { DueDatePipe } from '../shared/dueDate.pipe';
 import { NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../shared/vendor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-obligation-summary',
@@ -20,7 +21,8 @@ export class ObligationSummaryComponent {
 
   constructor(
     private invoicesSer: InvoicesService,
-    public vendSer: VendorService
+    public vendSer: VendorService,
+    private router: Router
   ) {}
   invoices: Invoice[] = [];
   invoicesSub!: Subscription;
@@ -43,6 +45,10 @@ export class ObligationSummaryComponent {
     this.invoicesSer.deleteInvoice(invoice);
   }
 
+  inProduction() {
+    alert('Funkcjonalność w trakcie tworzenia.');
+  }
+
   ngOnInit(): void {
     this.invoicesSub = this.invoicesSer.invoicesChange.subscribe(
       (vInvoices) => {
@@ -51,6 +57,13 @@ export class ObligationSummaryComponent {
         });
       }
     );
+  }
+
+  editInvoice(Invoice: Invoice) {
+    this.invoicesSer.declareAsEdited(Invoice);
+    this.invoicesSer.isBeingEdited = true;
+
+    this.router.navigate(['edit']);
   }
 
   ngOnDestroy(): void {

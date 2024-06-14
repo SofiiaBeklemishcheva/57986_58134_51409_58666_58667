@@ -45,7 +45,6 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
         val.invoiceType === invoiceType
       );
     });
-    console.log(filteredInvoices);
     return filteredInvoices;
   }
 
@@ -85,8 +84,7 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
       this.vendors = val;
     });
 
-    console.log(this.outcomingInvoices);
-    console.log(this.incomingInvoices);
+
   }
 
   ngOnDestroy(): void {
@@ -95,6 +93,6 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
 
   test() {
     let test;
-    console.log(this.vendSer.getVendorById(1)?.name);
+
   }
 }

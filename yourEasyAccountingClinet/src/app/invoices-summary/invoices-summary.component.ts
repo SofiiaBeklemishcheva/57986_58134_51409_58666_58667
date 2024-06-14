@@ -6,6 +6,7 @@ import { InvoicesService } from '../shared/invoices.service';
 import { DueDatePipe } from '../shared/dueDate.pipe';
 import { FormsModule } from '@angular/forms';
 import { VendorService } from '../shared/vendor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoices-summary',
@@ -26,7 +27,8 @@ export class InvoicesSummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private invoicesSer: InvoicesService,
-    public vendSer: VendorService
+    public vendSer: VendorService,
+    private router: Router
   ) {}
   invoices: Invoice[] = [];
   invoicesSub!: Subscription;
@@ -44,6 +46,11 @@ export class InvoicesSummaryComponent implements OnInit, OnDestroy {
     });
     this.invoices = filteredInvoices;
   }
+  editInvoice(Invoice: Invoice) {
+    this.invoicesSer.declareAsEdited(Invoice);
+    this.invoicesSer.isBeingEdited = true;
+    this.router.navigate(['edit']);
+  }
 
   ngOnInit(): void {
     this.invoicesSub = this.invoicesSer.invoicesChange.subscribe(
@@ -53,6 +60,10 @@ export class InvoicesSummaryComponent implements OnInit, OnDestroy {
         });
       }
     );
+  }
+
+  inProduction() {
+    alert('Funkcjonalność w trakcie tworzenia.');
   }
 
   ngOnDestroy(): void {

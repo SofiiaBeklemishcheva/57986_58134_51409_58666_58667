@@ -10,7 +10,8 @@ export class InvoicesService {
   constructor(private auth: AuthService) {}
 
   user: User | undefined;
-
+  invoiceIdUnderEdit!: number;
+  isBeingEdited: boolean = false;
   private invoices: Invoice[] = [
     {
       ID: 1,
@@ -27,16 +28,16 @@ export class InvoicesService {
       dueDate: new Date('12/05/2000'),
       invoiceType: 'wystawione',
       issuePlace: 'ostroleka',
-      deliveryMethod: '',
-      reciver: '',
-      payer: '',
-      seller: '',
-      assName: '',
-      assQty: 0,
-      assjm: '',
-      issuedBy: '',
-      recived: '',
-      comments: '',
+      deliveryMethod: 'asdasd',
+      reciver: 'sada',
+      payer: 'saddas',
+      seller: 'dasdas',
+      assName: 'adsdasdasd',
+      assQty: 12,
+      assjm: 'asdasdasdasdas',
+      issuedBy: 'dasdasdas',
+      recived: 'dasdasda',
+      comments: 'asdasdasda',
       payDate: new Date('12/08/2000'),
     },
     {
@@ -54,16 +55,16 @@ export class InvoicesService {
       dueDate: new Date('12/08/2000'),
       invoiceType: 'wystawione',
       issuePlace: 'wroclaw',
-      deliveryMethod: '',
-      reciver: '',
-      payer: '',
-      seller: '',
-      assName: '',
-      assQty: 0,
-      assjm: '',
-      issuedBy: '',
-      recived: '',
-      comments: '',
+      deliveryMethod: 'asdsad',
+      reciver: 'sadasdas',
+      payer: 'dsadasdsad',
+      seller: 'asdasdasd',
+      assName: 'asdasdasdasdas',
+      assQty: 12,
+      assjm: 'dsadasdasd',
+      issuedBy: 'asdasdas',
+      recived: 'dasdasd',
+      comments: 'asdasda',
       payDate: new Date('12/08/2000'),
     },
     {
@@ -143,9 +144,18 @@ export class InvoicesService {
   }
   updateInvoice() {}
 
+  declareAsEdited(invoice: Invoice) {
+    let id = this.invoices.indexOf(invoice);
+    this.invoiceIdUnderEdit = id;
+  }
+
   deleteInvoice(invoice: Invoice) {
     let id = this.invoices.indexOf(invoice);
     this.invoices.splice(id, 1);
     this.invoicesChange.next(this.invoices.slice());
+  }
+
+  comingSoon() {
+    alert('Funkcjonalność w produkcji');
   }
 }

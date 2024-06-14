@@ -73,12 +73,14 @@
               <a
                 class="dropdown-button dropdown-button-reverse"
                 style="margin-top: 1.6cm; z-index: 999; position: absolute"
+                (click)="editInvoice(invoice)"
               >
                 Edytuj</a
               >
               <a
                 class="dropdown-button dropdown-button-reverse"
                 style="margin-top: 3.2cm; z-index: 999; position: absolute"
+                (click)="inProduction()"
                 >Drukuj</a
               >
               <a
@@ -90,9 +92,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="array-row array-row-space">
-        <span class="button">Pobierz listę</span>
       </div>
     </div>
   </section>
