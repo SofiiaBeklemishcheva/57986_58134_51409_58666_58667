@@ -48,8 +48,10 @@ export class EditInvoiceComponent implements OnInit {
       assName: new FormControl(this.invoiceUnderEdit.assName),
       assQty: new FormControl(this.invoiceUnderEdit.assQty),
       assJm: new FormControl(this.invoiceUnderEdit.assjm),
-      netPrice: new FormControl(this.invoiceUnderEdit.netPrice),
-      VAT: new FormControl(this.invoiceUnderEdit.VAT),
+      netPrice: new FormControl(
+        this.invoiceUnderEdit.netPrice / this.invoiceUnderEdit.assQty
+      ),
+      VAT: new FormControl(this.invoiceUnderEdit.VAT * 100),
       issuedBy: new FormControl(this.invoiceUnderEdit.issuedBy),
       recived: new FormControl(this.invoiceUnderEdit.recived),
       comments: new FormControl(this.invoiceUnderEdit.comments),

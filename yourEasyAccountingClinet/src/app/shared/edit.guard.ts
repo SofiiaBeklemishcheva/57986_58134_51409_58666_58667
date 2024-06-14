@@ -4,7 +4,7 @@ import { InvoicesService } from './invoices.service';
 
 export const editGuard: CanActivateFn = (route, state) => {
   const invSer = inject(InvoicesService);
-  console.log(invSer.isBeingEdited);
+
   if (invSer.isBeingEdited) {
     return true;
   } else {

@@ -11,16 +11,16 @@ export class VendorService {
   private vendors: Vendor[] = [
     {
       ID: 1,
-      name: 'Kabaczkowa',
-      NIP: '423423423432',
+      name: 'EasyLease',
+      NIP: '5683748028',
       address: 'adres',
-      phone: '4324532124',
+      phone: '543634632',
       comments: 'testowykomentarz',
     },
     {
       ID: 2,
-      name: 'Legnicka',
-      NIP: '23423423432',
+      name: 'HugeHurtownia',
+      NIP: '5803583017',
       address: 'adres1',
       phone: '654734672',
       comments: 'testowykomentarz2',
@@ -50,7 +50,6 @@ export class VendorService {
       return vendor.ID == id;
     });
   }
-
 
   deleteVendor(vendor: Vendor) {
     let index = this.vendors.indexOf(vendor);
