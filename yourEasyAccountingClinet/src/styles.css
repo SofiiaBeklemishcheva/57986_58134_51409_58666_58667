@@ -80,7 +80,32 @@
   font-family: "Arial";
   cursor: pointer;
 }
-
+.button {
+  background-color: #da0bb8;
+  font-size: 20px;
+  color: #f9ebe0;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: bold;
+  width: 164px;
+  height: 60px;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  line-height: 60px;
+  font-family: "Arial";
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #ff00d4; /* Kolor tła po najechaniu */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Cień po najechaniu */
+  transform: scale(1.06); /* Przybliżenie przycisku */
+}
+.dropdown-button:hover {
+  background-color: #ff00d4; /* Kolor tła po najechaniu */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Cień po najechaniu */
+  transform: scale(1.06); /* Przybliżenie przycisku */
+}
 /*E-mail styles */
 .email {
   display: flex;
@@ -573,17 +598,18 @@ body {
 }
 
 /* Fade */
-.component-container {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+router-outlet + * {
+  display: block;
+  animation: outlet 0.4s;
 }
 
-.component-container.enter {
-  opacity: 1;
-  transform: translateX(0);
-}
+@keyframes outlet {
+  from {
+    opacity: 0;
+  }
 
-.component-container.leave {
-  opacity: 0;
-  transform: translateX(-100%);
+  to {
+    opacity: 1;
+  }
 }
