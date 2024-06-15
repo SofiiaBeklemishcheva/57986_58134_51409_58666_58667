@@ -51,7 +51,7 @@
             invoice.invoiceNum
           }}</span>
           <span class="array-cell array-cell-large">{{
-            vendSer.getVendorById(invoice.clientID)?.name
+            vendSer.getVendorById(invoice.clientID).name
           }}</span>
           <span class="array-cell array-cell-large">{{
             invoice.dueDate.toLocaleDateString()

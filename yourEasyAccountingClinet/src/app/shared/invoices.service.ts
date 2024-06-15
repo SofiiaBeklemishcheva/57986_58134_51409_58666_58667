@@ -43,7 +43,7 @@ export class InvoicesService {
     {
       ID: 2,
       invoiceNum: '202402',
-      issueDate: new Date('2024-06-03'),
+      issueDate: new Date('202422121303'),
       paymentMethod: 'cash',
       currency: 'PLN',
       netPrice: -800,

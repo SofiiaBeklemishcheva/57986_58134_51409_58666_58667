@@ -10,7 +10,7 @@ export class VendorService {
   constructor() {}
   private vendors: Vendor[] = [
     {
-      ID: 1,
+      ID: 416387525429,
       name: 'EasyLease',
       NIP: '5683748028',
       address: 'adres',
@@ -18,7 +18,7 @@ export class VendorService {
       comments: 'testowykomentarz',
     },
     {
-      ID: 2,
+      ID: 716057728707,
       name: 'HugeHurtownia',
       NIP: '5803583017',
       address: 'adres1',
@@ -38,17 +38,27 @@ export class VendorService {
   }
 
   getVendorNextIndex() {
-    if (this.vendors.length > 0) {
-      return this.vendors[this.vendors.length - 1].ID + 1;
-    } else {
-      return 1;
-    }
+    console.log(Math.trunc(Math.random() * 1000000000000));
+    return Math.trunc(Math.random() * 1000000000000);
   }
 
-  getVendorById(id: number) {
-    return this.vendors.find((vendor) => {
+  getVendorById(id: number): Vendor {
+    let vend = this.vendors.find((vendor) => {
       return vendor.ID == id;
     });
+
+    if (typeof vend == 'object') {
+      return vend!;
+    }
+
+    return {
+      ID: 99999,
+      name: 'Brak',
+      NIP: '',
+      address: '',
+      phone: '',
+      comments: '',
+    };
   }
 
   deleteVendor(vendor: Vendor) {
@@ -56,5 +66,9 @@ export class VendorService {
 
     this.vendors.splice(index, 1);
     this.vendorsChange.next(this.vendors);
+  }
+
+  getVendorIndex(vendor: Vendor) {
+    return this.vendors.indexOf(vendor);
   }
 }

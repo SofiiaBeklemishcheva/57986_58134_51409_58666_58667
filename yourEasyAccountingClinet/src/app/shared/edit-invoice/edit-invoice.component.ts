@@ -23,6 +23,19 @@ import { Router } from '@angular/router';
 export class EditInvoiceComponent implements OnInit {
   selectedVendor: any;
   invoiceUnderEdit: Invoice;
+
+  issueDateVal!: any;
+  dueDateVal!: any;
+  payDateVal!: any;
+  chosenVendor!: number;
+
+  dateValidityCheck(InitDate: any) {
+    if (!!InitDate.getDate()) {
+      return formatDate(new Date(InitDate), 'yyyy-MM-dd', 'en');
+    } else {
+      return undefined;
+    }
+  }
   constructor(
     private vendorsService: VendorService,
     private invoiceService: InvoicesService,
@@ -31,15 +44,17 @@ export class EditInvoiceComponent implements OnInit {
   ) {
     this.invoiceUnderEdit =
       invoiceService.getInvoices()[invoiceService.invoiceIdUnderEdit];
+
+    this.issueDateVal = this.dateValidityCheck(this.invoiceUnderEdit.issueDate);
+    this.dueDateVal = this.dateValidityCheck(this.invoiceUnderEdit.dueDate);
+    this.payDateVal = this.dateValidityCheck(this.invoiceUnderEdit.payDate);
+    this.chosenVendor = this.vendorsService.getVendorIndex(
+      this.vendorsService.getVendorById(this.invoiceUnderEdit.clientID)
+    );
+
     this.addInvoiceForm = new FormGroup({
       invoiceNum: new FormControl(this.invoiceUnderEdit.invoiceNum),
-      issueDate: new FormControl(
-        formatDate(
-          new Date(this.invoiceUnderEdit.issueDate),
-          'yyyy-MM-dd',
-          'en'
-        )
-      ),
+      issueDate: new FormControl(this.issueDateVal),
       issuePlace: new FormControl(this.invoiceUnderEdit.issuePlace),
       deliveryMethod: new FormControl(this.invoiceUnderEdit.deliveryMethod),
       reciver: new FormControl(this.invoiceUnderEdit.reciver),
@@ -64,9 +79,10 @@ export class EditInvoiceComponent implements OnInit {
       payDate: new FormControl(
         formatDate(new Date(this.invoiceUnderEdit.payDate), 'yyyy-MM-dd', 'en')
       ),
-      vendorID: new FormControl(1),
+      vendorID: new FormControl(this.chosenVendor + 1),
     });
   }
+
   vendorsSub!: Subscription;
   vendors: Vendor[] = [];
   addInvoiceForm: FormGroup;

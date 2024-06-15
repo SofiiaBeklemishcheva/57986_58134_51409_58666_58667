@@ -14,7 +14,7 @@
           invoice.issueDate.toLocaleDateString()
         }}</span>
         <span class="array-cell array-cell-small">{{
-          vendSer.getVendorById(invoice.clientID)?.name
+          vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-small">{{
           Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
@@ -38,7 +38,7 @@
           invoice.issueDate.toLocaleDateString()
         }}</span>
         <span class="array-cell array-cell-small">{{
-          vendSer.getVendorById(invoice.clientID)?.name
+          vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-small">{{
           Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
