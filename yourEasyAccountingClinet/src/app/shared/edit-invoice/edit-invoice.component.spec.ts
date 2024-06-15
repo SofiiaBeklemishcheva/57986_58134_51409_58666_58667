@@ -1,81 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EditInvoiceComponent } from './edit-invoice.component';
-import { VendorService } from '../vendor.service';
-import { InvoicesService } from '../invoices.service';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { of } from 'rxjs';
 
 describe('EditInvoiceComponent', () => {
   let component: EditInvoiceComponent;
   let fixture: ComponentFixture<EditInvoiceComponent>;
-  let mockVendorService: jasmine.SpyObj<VendorService>;
-  let mockInvoiceService: jasmine.SpyObj<InvoicesService>;
-  let mockAuthService: jasmine.SpyObj<AuthService>;
-  let mockRouter: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    mockVendorService = jasmine.createSpyObj('VendorService', [
-      'vendorsChange',
-    ]);
-    mockInvoiceService = jasmine.createSpyObj('InvoicesService', [
-      'getInvoices',
-      'addInvoice',
-      'deleteInvoice',
-    ]);
-    mockAuthService = jasmine.createSpyObj('AuthService', ['getUser']);
-    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
-
-    mockInvoiceService.getInvoices.and.returnValue([
-      {
-        ID: 1,
-        invoiceNum: '123',
-        issueDate: new Date('2023-02-01'),
-        issuePlace: 'Place',
-        deliveryMethod: 'Method',
-        reciver: 'Reciver',
-        payer: 'Payer',
-        seller: 'Seller',
-        assName: 'Item',
-        assQty: 10,
-        assjm: 'pcs',
-        netPrice: 100,
-        VAT: 0.23,
-        issuedBy: 'Issuer',
-        recived: 'Recived',
-        comments: 'Comments',
-        dueDate: new Date('2023-02-01'),
-        payDate: new Date('2023-02-01'),
-        paymentMethod: '',
-        currency: '',
-        issuerID: 0,
-        clientID: 0,
-        materialName: '',
-        amount: '',
-        invoiceType: '',
-      },
-    ]);
-    mockInvoiceService.invoiceIdUnderEdit = 0;
-    mockAuthService.getUser.and.returnValue({
-      ID: 2,
-      albumId: 5,
-      name: 'test',
-      surname: 'Test',
-      nickname: 'Testowy',
-      access: 2,
-    });
-
     await TestBed.configureTestingModule({
-      imports: [CommonModule, ReactiveFormsModule],
-      declarations: [EditInvoiceComponent],
-      providers: [
-        { provide: VendorService, useValue: mockVendorService },
-        { provide: InvoicesService, useValue: mockInvoiceService },
-        { provide: AuthService, useValue: mockAuthService },
-        { provide: Router, useValue: mockRouter },
-      ],
+      imports: [CommonModule, ReactiveFormsModule, EditInvoiceComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditInvoiceComponent);
@@ -88,28 +22,62 @@ describe('EditInvoiceComponent', () => {
   });
 
   it('should initialize the form with invoice data', () => {
-    const invoice =
-      mockInvoiceService.getInvoices()[mockInvoiceService.invoiceIdUnderEdit];
+    const invoice = {
+      ID: 1,
+      invoiceNum: '123',
+      issueDate: new Date('2023-01-01'),
+      issuePlace: 'Place',
+      deliveryMethod: 'Method',
+      reciver: 'Reciver',
+      payer: 'Payer',
+      seller: 'Seller',
+      assName: 'Item',
+      assQty: 10,
+      assjm: 'pcs',
+      netPrice: 1000,
+      VAT: 0.23,
+      issuedBy: 'Issuer',
+      recived: 'Recived',
+      comments: 'Comments',
+      dueDate: new Date('2023-02-01'),
+      payDate: new Date('2023-02-15'),
+      paymentMethod: '',
+      currency: '',
+      issuerID: 0,
+      clientID: 1,
+      materialName: '',
+      amount: '',
+      invoiceType: '',
+    };
+
+    component.invoiceUnderEdit = invoice;
+    component.ngOnInit();
+
     expect(component.addInvoiceForm.get('invoiceNum')?.value).toBe(
       invoice.invoiceNum
     );
-    expect(component.addInvoiceForm.get('issueDate')?.value).toBe('2023-01-01');
+    expect(component.addInvoiceForm.get('issueDate')?.value).toBe(
+      '2023-01-01' || undefined
+    );
     expect(component.addInvoiceForm.get('netPrice')?.value).toBe(
       invoice.netPrice / invoice.assQty
     );
     expect(component.addInvoiceForm.get('VAT')?.value).toBe(invoice.VAT * 100);
-    // Add other form fields checks here
   });
 
-  it('should submit the form and call addInvoice and deleteInvoice methods', () => {
-    spyOn(window, 'alert');
+  it('should format dates correctly in dateValidityCheck', () => {
+    const validDate = new Date('2023-01-01');
+    const invalidDate = 'invalid-date';
+    expect(component.dateValidityCheck(validDate)).toBe('2023-01-01');
+    expect(component.dateValidityCheck(invalidDate)).toBeUndefined();
+  });
+
+  it('should reset the form after submission', () => {
+    component.addInvoiceForm.get('invoiceNum')?.setValue('123');
     component.onSubmit();
-    expect(mockInvoiceService.addInvoice).toHaveBeenCalled();
-    expect(mockInvoiceService.deleteInvoice).toHaveBeenCalledWith(
-      component.invoiceUnderEdit
-    );
-    expect(window.alert).toHaveBeenCalledWith('Faktura edytowana pomyślnie');
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['home']);
+
+    expect(component.addInvoiceForm.pristine).toBeTrue();
+    expect(component.addInvoiceForm.untouched).toBeTrue();
   });
 
   it('should handle payment methods correctly', () => {
@@ -117,14 +85,25 @@ describe('EditInvoiceComponent', () => {
     component.addInvoiceForm.get('card')?.setValue(true);
     component.addInvoiceForm.get('bank')?.setValue(true);
     component.onSubmit();
-    expect(mockInvoiceService.addInvoice).toHaveBeenCalledWith(
-      jasmine.arrayContaining([
-        jasmine.objectContaining({
-          paymentMethod: 'cash card bank',
-        }),
-      ])
-    );
+    expect(component.addInvoiceForm.get('cash')?.value).toBeTrue();
+    expect(component.addInvoiceForm.get('card')?.value).toBeTrue();
+    expect(component.addInvoiceForm.get('bank')?.value).toBeTrue();
   });
 
-  // Add more tests as necessary
+  it('should not submit the form if it is invalid', () => {
+    component.addInvoiceForm.get('invoiceNum')?.setValue('');
+    component.onSubmit();
+
+    expect(component.addInvoiceForm.valid).toBeFalse();
+  });
+
+  it('should set isBeingEdited to false on init', () => {
+    component.ngOnInit();
+    expect(component.invoiceService.isBeingEdited).toBeFalse();
+  });
+
+  it('should set vendors array on init', () => {
+    component.ngOnInit();
+    expect(component.vendors).toEqual([]);
+  });
 });

@@ -38,7 +38,6 @@ export class VendorService {
   }
 
   getVendorNextIndex() {
-    console.log(Math.trunc(Math.random() * 1000000000000));
     return Math.trunc(Math.random() * 1000000000000);
   }
 

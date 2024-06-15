@@ -17,12 +17,12 @@ export class InvoicesService {
       ID: 1,
       invoiceNum: '202401',
       issueDate: new Date('2024-06-01'),
-      paymentMethod: 'bank transfer',
+      paymentMethod: 'bank',
       currency: 'PLN',
       netPrice: -1500,
       VAT: 0.23,
       issuerID: 1001,
-      clientID: 1,
+      clientID: 416387525429,
       materialName: 'Laptop Dell XPS 15',
       amount: '1',
       dueDate: new Date('2024-06-14'),
@@ -49,7 +49,7 @@ export class InvoicesService {
       netPrice: -800,
       VAT: 0.23,
       issuerID: 1002,
-      clientID: 2,
+      clientID: 416387525429,
       materialName: 'Smartphone Samsung Galaxy S22',
       amount: '1',
       dueDate: new Date('2024-06-18'),
@@ -71,12 +71,12 @@ export class InvoicesService {
       ID: 3,
       invoiceNum: '202403',
       issueDate: new Date('2024-06-05'),
-      paymentMethod: 'bank transfer',
+      paymentMethod: 'bank cash',
       currency: 'PLN',
       netPrice: 5000,
       VAT: 0.23,
       issuerID: 1001,
-      clientID: 2,
+      clientID: 716057728707,
       materialName: 'Oprogramowanie biurowe Microsoft Office 365',
       amount: '10',
       dueDate: new Date('2024-06-20'),
@@ -98,12 +98,12 @@ export class InvoicesService {
       ID: 4,
       invoiceNum: '202404',
       issueDate: new Date('2024-06-07'),
-      paymentMethod: 'bank transfer',
+      paymentMethod: 'bank cash card',
       currency: 'PLN',
       netPrice: 3200,
       VAT: 0.23,
       issuerID: 1003,
-      clientID: 1,
+      clientID: 416387525429,
       materialName: 'Usługi serwisowe komputera stacjonarnego',
       amount: '1',
       dueDate: new Date('2024-06-22'),
@@ -136,11 +136,14 @@ export class InvoicesService {
   }
 
   getInvoiceNextIndex() {
-    if (this.invoices.length > 0) {
-      return this.invoices[this.invoices.length - 1].ID + 1;
-    } else {
-      return 1;
-    }
+    return Math.trunc(Math.random() * 1000000000000);
+
+    // Zdecydowałem się na rozwiązanie mniej uzależnione od backednu
+    //if (this.invoices.length > 0) {
+    // return this.invoices[this.invoices.length - 1].ID + 1;
+    // } else {
+    //   return 1;
+    //  }
   }
   updateInvoice() {}
 

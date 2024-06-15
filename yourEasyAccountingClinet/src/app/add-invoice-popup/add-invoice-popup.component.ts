@@ -48,7 +48,7 @@ export class AddInvoicePopupComponent implements OnInit {
       card: new FormControl(),
       bank: new FormControl(),
       payDate: new FormControl(),
-      vendorID: new FormControl(1),
+      vendorID: new FormControl(),
     });
   }
   inProduction() {

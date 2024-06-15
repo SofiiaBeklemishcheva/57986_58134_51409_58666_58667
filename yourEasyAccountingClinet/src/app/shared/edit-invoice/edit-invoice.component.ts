@@ -28,9 +28,21 @@ export class EditInvoiceComponent implements OnInit {
   dueDateVal!: any;
   payDateVal!: any;
   chosenVendor!: number;
+  cash!: boolean;
+  card!: boolean;
+  bank!: boolean;
+
+  paymentMethodCheck(string: string) {
+    if (this.invoiceUnderEdit.paymentMethod.indexOf(string) >= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   dateValidityCheck(InitDate: any) {
-    if (!!InitDate.getDate()) {
+    let date = new Date(InitDate);
+    if (!!date?.getDate()) {
       return formatDate(new Date(InitDate), 'yyyy-MM-dd', 'en');
     } else {
       return undefined;
@@ -38,48 +50,49 @@ export class EditInvoiceComponent implements OnInit {
   }
   constructor(
     private vendorsService: VendorService,
-    private invoiceService: InvoicesService,
+    public invoiceService: InvoicesService,
     private authService: AuthService,
     private router: Router
   ) {
     this.invoiceUnderEdit =
       invoiceService.getInvoices()[invoiceService.invoiceIdUnderEdit];
-
-    this.issueDateVal = this.dateValidityCheck(this.invoiceUnderEdit.issueDate);
-    this.dueDateVal = this.dateValidityCheck(this.invoiceUnderEdit.dueDate);
-    this.payDateVal = this.dateValidityCheck(this.invoiceUnderEdit.payDate);
-    this.chosenVendor = this.vendorsService.getVendorIndex(
-      this.vendorsService.getVendorById(this.invoiceUnderEdit.clientID)
+    this.cash = this.paymentMethodCheck('cash');
+    this.bank = this.paymentMethodCheck('bank');
+    this.card = this.paymentMethodCheck('card');
+    this.issueDateVal = this.dateValidityCheck(
+      this.invoiceUnderEdit?.issueDate
     );
+    this.dueDateVal = this.dateValidityCheck(this.invoiceUnderEdit?.dueDate);
+    this.payDateVal = this.dateValidityCheck(this.invoiceUnderEdit?.payDate);
 
+    this.chosenVendor = this.vendorsService.getVendorIndex(
+      this.vendorsService.getVendorById(this.invoiceUnderEdit?.clientID)
+    );
+    console.log(this.chosenVendor);
     this.addInvoiceForm = new FormGroup({
-      invoiceNum: new FormControl(this.invoiceUnderEdit.invoiceNum),
-      issueDate: new FormControl(this.issueDateVal),
-      issuePlace: new FormControl(this.invoiceUnderEdit.issuePlace),
-      deliveryMethod: new FormControl(this.invoiceUnderEdit.deliveryMethod),
-      reciver: new FormControl(this.invoiceUnderEdit.reciver),
-      payer: new FormControl(this.invoiceUnderEdit.payer),
-      seller: new FormControl(this.invoiceUnderEdit.seller),
-      assName: new FormControl(this.invoiceUnderEdit.assName),
-      assQty: new FormControl(this.invoiceUnderEdit.assQty),
-      assJm: new FormControl(this.invoiceUnderEdit.assjm),
+      invoiceNum: new FormControl(this.invoiceUnderEdit?.invoiceNum),
+      issueDate: new FormControl(this?.issueDateVal),
+      issuePlace: new FormControl(this.invoiceUnderEdit?.issuePlace),
+      deliveryMethod: new FormControl(this.invoiceUnderEdit?.deliveryMethod),
+      reciver: new FormControl(this.invoiceUnderEdit?.reciver),
+      payer: new FormControl(this.invoiceUnderEdit?.payer),
+      seller: new FormControl(this.invoiceUnderEdit?.seller),
+      assName: new FormControl(this.invoiceUnderEdit?.assName),
+      assQty: new FormControl(this.invoiceUnderEdit?.assQty),
+      assJm: new FormControl(this.invoiceUnderEdit?.assjm),
       netPrice: new FormControl(
-        this.invoiceUnderEdit.netPrice / this.invoiceUnderEdit.assQty
+        this.invoiceUnderEdit?.netPrice / this.invoiceUnderEdit?.assQty
       ),
-      VAT: new FormControl(this.invoiceUnderEdit.VAT * 100),
-      issuedBy: new FormControl(this.invoiceUnderEdit.issuedBy),
-      recived: new FormControl(this.invoiceUnderEdit.recived),
-      comments: new FormControl(this.invoiceUnderEdit.comments),
-      dueDate: new FormControl(
-        formatDate(new Date(this.invoiceUnderEdit.dueDate), 'yyyy-MM-dd', 'en')
-      ),
-      cash: new FormControl(),
-      card: new FormControl(),
-      bank: new FormControl(),
-      payDate: new FormControl(
-        formatDate(new Date(this.invoiceUnderEdit.payDate), 'yyyy-MM-dd', 'en')
-      ),
-      vendorID: new FormControl(this.chosenVendor + 1),
+      VAT: new FormControl(this.invoiceUnderEdit?.VAT * 100),
+      issuedBy: new FormControl(this.invoiceUnderEdit?.issuedBy),
+      recived: new FormControl(this.invoiceUnderEdit?.recived),
+      comments: new FormControl(this.invoiceUnderEdit?.comments),
+      dueDate: new FormControl(this?.dueDateVal),
+      cash: new FormControl(this.cash),
+      card: new FormControl(this.card),
+      bank: new FormControl(this.bank),
+      payDate: new FormControl(this?.payDateVal),
+      vendorID: new FormControl(this.invoiceUnderEdit?.clientID),
     });
   }
 
@@ -114,7 +127,7 @@ export class EditInvoiceComponent implements OnInit {
 
     this.invoiceService.addInvoice([
       {
-        ID: this.invoiceUnderEdit.ID,
+        ID: this.invoiceUnderEdit?.ID,
         invoiceNum: String(this.addInvoiceForm.get('invoiceNum')?.value),
         issueDate: new Date(
           String(this.addInvoiceForm.get('issueDate')?.value)
