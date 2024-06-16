@@ -34,11 +34,6 @@ export class LoginFormComponent implements OnInit {
       this.signupForm.get('username')?.value,
       this.signupForm.get('password')?.value
     );
-    if (this.auth.getUser() !== null || undefined) {
-      this.router.navigate(['home']);
-    } else {
-      alert('Logowanie nieudane, proszę sprawdzić hasło/login.');
-    }
   }
 
   ngOnInit() {}

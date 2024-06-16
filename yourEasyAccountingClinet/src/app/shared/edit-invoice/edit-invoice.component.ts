@@ -78,10 +78,10 @@ export class EditInvoiceComponent implements OnInit {
       payer: new FormControl(this.invoiceUnderEdit?.payer),
       seller: new FormControl(this.invoiceUnderEdit?.seller),
       assName: new FormControl(this.invoiceUnderEdit?.assName),
-      assQty: new FormControl(this.invoiceUnderEdit?.assQty),
+      assQty: new FormControl(this.invoiceUnderEdit?.amount),
       assJm: new FormControl(this.invoiceUnderEdit?.assjm),
       netPrice: new FormControl(
-        this.invoiceUnderEdit?.netPrice / this.invoiceUnderEdit?.assQty
+        this.invoiceUnderEdit?.netPrice / Number(this.invoiceUnderEdit?.amount)
       ),
       VAT: new FormControl(this.invoiceUnderEdit?.VAT * 100),
       issuedBy: new FormControl(this.invoiceUnderEdit?.issuedBy),
@@ -150,7 +150,6 @@ export class EditInvoiceComponent implements OnInit {
         payer: String(this.addInvoiceForm.get('payer')?.value),
         seller: String(this.addInvoiceForm.get('seller')?.value),
         assName: String(this.addInvoiceForm.get('assName')?.value),
-        assQty: Number(this.addInvoiceForm.get('assQty')?.value),
         assjm: String(this.addInvoiceForm.get('assJm')?.value),
         issuedBy: String(this.addInvoiceForm.get('issuedBy')?.value),
         recived: String(this.addInvoiceForm.get('recived')?.value),

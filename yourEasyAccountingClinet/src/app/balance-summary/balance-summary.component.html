@@ -37,11 +37,11 @@
         <span class="array-cell array-cell-large">Data wystawienia</span>
         <span class="array-cell array-cell-large">Numer faktury</span>
         <span class="array-cell array-cell-large">Podmiot</span>
-        <span class="array-cell array-cell-large">Netto</span>
+        <span class="array-cell array-cell-large">Brutto</span>
       </div>
       <div class="array-row" *ngFor="let invoice of incomingInvoices">
         <span class="array-cell array-cell-large">{{
-          invoice.issueDate.toLocaleDateString()
+          invoice.issueDate | date : "dd/MM/yyyy"
         }}</span>
         <span class="array-cell array-cell-large">{{
           invoice.invoiceNum
@@ -50,7 +50,9 @@
           vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-large">{{
-          invoice.netPrice + " " + invoice.currency
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice) +
+            " " +
+            invoice.currency
         }}</span>
       </div>
 
@@ -69,11 +71,11 @@
         <span class="array-cell array-cell-large">Data wystawienia</span>
         <span class="array-cell array-cell-large">Numer faktury</span>
         <span class="array-cell array-cell-large">Podmiot</span>
-        <span class="array-cell array-cell-large">Netto</span>
+        <span class="array-cell array-cell-large">Brutto</span>
       </div>
       <div class="array-row" *ngFor="let invoice of outcomingInvoices">
         <span class="array-cell array-cell-large">{{
-          invoice.issueDate.toLocaleDateString()
+          invoice.issueDate | date : "dd/MM/yyyy"
         }}</span>
         <span class="array-cell array-cell-large">{{
           invoice.invoiceNum
@@ -82,7 +84,9 @@
           vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-large">{{
-          Absolute(invoice.netPrice) + " " + invoice.currency
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice) +
+            " " +
+            invoice.currency
         }}</span>
       </div>
 

@@ -1,10 +1,12 @@
 <?php
 header('Content-Type: application/json');
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 $servername = "localhost";
 $database = "faktury";
 $username = "root";
-$password = "root";
+$password = "dsaj31nhasd32!";
 
 try {
     // Połączenie z bazą danych
@@ -25,17 +27,17 @@ try {
         fx.Nazwa_towaru AS materialName, 
         fx.Ilość AS amount, 
         fx.Termin_platnosci AS dueDate, 
-        fx.`Typ faktury` AS invoiceType, 
-        fx.`Miejsce wystawienia` AS issuePlace,
+        fx.Typ_faktury AS invoiceType, 
+        fx.`Miejsce_wystawienia` AS issuePlace,
         fx.Dostawa AS deliveryMethod,
         fx.Odbiorca AS reciver,
         fx.Płacący AS payer,
         fx.Sprzedający AS seller,
-        fx.`Jednostka miary` AS assjm,
-        fx.`Utworzony przez` AS issuedBy,
+        fx.Jednostka_miary AS assjm,
+        fx.Utworzony_przez AS issuedBy,
         fx.Odebrano AS recived,
         fx.Komentarze AS comments,
-        fx.`Zapłacono dnia` AS payDate
+        fx.Zapłacono_dnia AS payDate
         FROM fx");
 
     // Wykonanie zapytania SQL

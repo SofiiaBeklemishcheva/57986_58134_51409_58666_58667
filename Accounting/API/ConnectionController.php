@@ -5,6 +5,10 @@ namespace API;
 use PDO;
 use PDOException;
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 class ConnectionController
 {
     private $conn;
@@ -14,7 +18,7 @@ class ConnectionController
         $servername = "localhost";
         $database = "faktury";
         $username = "root";
-        $password = "root";
+        $password = "dsaj31nhasd32!";
 
         try {
             $this->conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);

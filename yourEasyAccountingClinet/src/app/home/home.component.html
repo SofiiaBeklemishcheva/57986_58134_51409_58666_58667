@@ -9,15 +9,19 @@
         <span class="array-cell array-cell-small">Brutto</span>
       </div>
       <div class="array-row" *ngFor="let invoice of outcomingInvoices">
-        <span class="array-cell array-cell-small">{{ invoice.ID }}</span>
         <span class="array-cell array-cell-small">{{
-          invoice.issueDate.toLocaleDateString()
+          invoice.invoiceNum
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          invoice.issueDate | date
         }}</span>
         <span class="array-cell array-cell-small">{{
           vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-small">{{
-          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice) +
+            " " +
+            invoice.currency
         }}</span>
       </div>
     </div>
@@ -33,15 +37,19 @@
         <span class="array-cell array-cell-small">Brutto</span>
       </div>
       <div class="array-row" *ngFor="let invoice of incomingInvoices">
-        <span class="array-cell array-cell-small">{{ invoice.ID }}</span>
         <span class="array-cell array-cell-small">{{
-          invoice.issueDate.toLocaleDateString()
+          invoice.invoiceNum
+        }}</span>
+        <span class="array-cell array-cell-small">{{
+          invoice.issueDate | date
         }}</span>
         <span class="array-cell array-cell-small">{{
           vendSer.getVendorById(invoice.clientID).name
         }}</span>
         <span class="array-cell array-cell-small">{{
-          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice)
+          Absolute(invoice.netPrice * invoice.VAT + invoice.netPrice) +
+            " " +
+            invoice.currency
         }}</span>
       </div>
     </div>

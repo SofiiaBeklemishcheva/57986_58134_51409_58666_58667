@@ -19,7 +19,6 @@ export interface Invoice {
   payer: string;
   seller: string;
   assName: string;
-  assQty: number;
   assjm: string;
   issuedBy: string;
   recived: string;

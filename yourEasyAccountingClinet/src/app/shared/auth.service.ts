@@ -1,29 +1,50 @@
 import { Injectable } from '@angular/core';
 import { User } from './interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   user = new BehaviorSubject<User | null>(null);
 
-  logIn(login: string, password: string) {
-    if (login === 'admin' && password === 'admin') {
-      this.user.next({
-        ID: 2,
-        albumId: 5,
-        name: login,
-        surname: 'Test',
-        nickname: 'Testowy',
-        access: 2,
+  storeRecipes() {
+    return this.http
+      .post('http://localhost/api/login.php', {
+        login: 'user1',
+        password: 'pass1',
+      })
+      .subscribe((response) => {
+        console.log(response);
       });
-      if (this.user !== null) {
-        localStorage.setItem('user', JSON.stringify(this.user.value));
-      }
-    }
+  }
+
+  logIn(login: string, password: string) {
+    this.http
+      .post<{ status: string }>('http://localhost/api/login.php', {
+        login: login,
+        password: password,
+      })
+      .subscribe((response) => {
+        if (response.status === 'OK') {
+          this.user.next({
+            ID: 13,
+            albumId: 32123,
+            nickname: login,
+            name: 'testname',
+            surname: 'TestSurname',
+            access: 0,
+          });
+          localStorage.setItem('user', JSON.stringify(this.user.value));
+          this.router.navigate(['home']);
+        } else {
+          alert('Niewłaściwe dane logowania');
+        }
+      });
   }
 
   logOut() {

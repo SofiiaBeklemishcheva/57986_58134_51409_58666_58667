@@ -47,7 +47,6 @@ describe('InvoicesService', () => {
       payer: 'Firma DEF Sp. z o.o.',
       seller: 'Sklep Elektroniczny "Tech Store"',
       assName: 'Monitor LG UltraWide',
-      assQty: 2,
       assjm: 'szt.',
       issuedBy: 'Robert Lewandowski',
       recived: 'Katarzyna Zielińska',

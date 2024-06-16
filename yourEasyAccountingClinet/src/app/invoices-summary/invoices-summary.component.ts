@@ -38,9 +38,10 @@ export class InvoicesSummaryComponent implements OnInit, OnDestroy {
     const dateTo: Date = new Date(this.dateTo);
     const initialInvoices = this.invoicesSer.getInvoices();
     const filteredInvoices = initialInvoices.filter((val) => {
+      let issueDate = new Date(val.issueDate);
       return (
-        val.issueDate.getTime() >= dateFrom.getTime() - 6400000 &&
-        val.issueDate.getTime() <= dateTo.getTime() + 6400000 &&
+        issueDate.getTime() >= dateFrom.getTime() - 6400000 &&
+        issueDate.getTime() <= dateTo.getTime() + 6400000 &&
         val.invoiceType === 'do zapłaty'
       );
     });

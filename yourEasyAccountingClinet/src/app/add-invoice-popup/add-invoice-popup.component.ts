@@ -8,15 +8,16 @@ import {
 } from '@angular/forms';
 import { VendorService } from '../shared/vendor.service';
 import { Vendor } from '../shared/interfaces';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { InvoicesService } from '../shared/invoices.service';
 import { AuthService } from '../shared/auth.service';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-invoice-popup',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, FormsModule],
+  imports: [ReactiveFormsModule, NgFor, FormsModule, CommonModule],
   templateUrl: './add-invoice-popup.component.html',
   styleUrl: './add-invoice-popup.component.css',
 })
@@ -25,7 +26,8 @@ export class AddInvoicePopupComponent implements OnInit {
   constructor(
     private vendorsService: VendorService,
     private invoiceService: InvoicesService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.addInvoiceForm = new FormGroup({
       invoiceNum: new FormControl(),
@@ -109,7 +111,6 @@ export class AddInvoicePopupComponent implements OnInit {
         payer: String(this.addInvoiceForm.get('payer')?.value),
         seller: String(this.addInvoiceForm.get('seller')?.value),
         assName: String(this.addInvoiceForm.get('assName')?.value),
-        assQty: Number(this.addInvoiceForm.get('assQty')?.value),
         assjm: String(this.addInvoiceForm.get('assJm')?.value),
         issuedBy: String(this.addInvoiceForm.get('issuedBy')?.value),
         recived: String(this.addInvoiceForm.get('recived')?.value),
@@ -125,5 +126,25 @@ export class AddInvoicePopupComponent implements OnInit {
     this.vendorsSub = this.vendorsService.vendorsChange.subscribe((val) => {
       this.vendors = val;
     });
+  }
+  apiUrl = 'http://localhost:8000/';
+
+  test() {
+    this.storeRecipes();
+  }
+
+  storeRecipes() {
+    this.http
+      .post('http://localhost/api/vendor-delete.php', {
+        ID: 312323,
+        name: 'test',
+        NIP: 2312412,
+        address: 'abssws',
+        phone: '321543234',
+        comments: 'testowy komponent',
+      })
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

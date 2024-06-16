@@ -39,9 +39,10 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
     const dateTo: Date = new Date(this.dateTo);
     const initialInvoices = this.invoicesSer.getInvoices();
     const filteredInvoices = initialInvoices.filter((val) => {
+      let issueDate = new Date(val.issueDate);
       return (
-        val.issueDate.getTime() >= dateFrom.getTime() - 6400000 &&
-        val.issueDate.getTime() <= dateTo.getTime() + 6400000 &&
+        issueDate.getTime() >= dateFrom.getTime() - 6400000 &&
+        issueDate.getTime() <= dateTo.getTime() + 6400000 &&
         val.invoiceType === invoiceType
       );
     });
@@ -51,14 +52,14 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
   incomingBalance(): number {
     let balance: number = 0;
     this.incomingInvoices.forEach((val) => {
-      balance += val.netPrice;
+      balance += val.netPrice + val.VAT * val.netPrice;
     });
     return this.Absolute(balance);
   }
   outcomingBalance(): number {
     let balance: number = 0;
     this.outcomingInvoices.forEach((val) => {
-      balance += val.netPrice;
+      balance += val.netPrice + val.VAT * val.netPrice;
     });
     return this.Absolute(balance);
   }
@@ -83,8 +84,6 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
     this.vendorsSub = this.vendSer.vendorsChange.subscribe((val) => {
       this.vendors = val;
     });
-
-
   }
 
   ngOnDestroy(): void {
@@ -93,6 +92,5 @@ export class BalanceSummaryComponent implements OnInit, OnDestroy {
 
   test() {
     let test;
-
   }
 }

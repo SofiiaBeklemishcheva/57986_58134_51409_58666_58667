@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Invoice, Vendor } from '../shared/interfaces';
 import { InvoicesService } from '../shared/invoices.service';
 import { VendorService } from '../shared/vendor.service';
@@ -44,8 +44,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.invoicesSub = this.invoicesSer.invoicesChange.subscribe(
-      (vInvoices) => {
+    this.invoicesSub = this.invoicesSer.invoicesChange
+      .pipe(take(1))
+      .subscribe((vInvoices) => {
         vInvoices.forEach((val) => {
           if (val.invoiceType === 'wystawione') {
             this.incomingInvoices.push(val);
@@ -53,8 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.outcomingInvoices.push(val);
           }
         });
-      }
-    );
+      });
     this.vendorsSub = this.vendSer.vendorsChange.subscribe((vVendors) => {
       this.vendors = vVendors;
     });

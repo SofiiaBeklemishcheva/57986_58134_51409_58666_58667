@@ -1,10 +1,12 @@
 <?php
 header('Content-Type: application/json');
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 $servername = "localhost";
 $database = "faktury";
 $username = "root";
-$password = "root";
+$password = "dsaj31nhasd32!";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
@@ -64,29 +66,29 @@ try {
     )");
 
     // Wiązanie wartości z otrzymanych danych JSON do zapytania SQL
-    $stmt->bindValue(':invoiceNum', $data->invoiceNum, PDO::PARAM_STR);
-    $stmt->bindValue(':issueDate', $data->issueDate, PDO::PARAM_STR);
-    $stmt->bindValue(':paymentMethod', $data->paymentMethod, PDO::PARAM_STR);
-    $stmt->bindValue(':currency', $data->currency, PDO::PARAM_STR);
-    $stmt->bindValue(':netPrice', $data->netPrice, PDO::PARAM_STR);
-    $stmt->bindValue(':VAT', $data->VAT, PDO::PARAM_STR);
-    $stmt->bindValue(':issuerID', $data->issuerID, PDO::PARAM_INT);
-    $stmt->bindValue(':clientID', $data->clientID, PDO::PARAM_INT);
-    $stmt->bindValue(':materialName', $data->materialName, PDO::PARAM_STR);
-    $stmt->bindValue(':amount', $data->amount, PDO::PARAM_STR);
-    $stmt->bindValue(':dueDate', $data->dueDate, PDO::PARAM_STR);
-    $stmt->bindValue(':invoiceType', $data->invoiceType, PDO::PARAM_STR);
-    $stmt->bindValue(':issuePlace', $data->issuePlace, PDO::PARAM_STR);
-    $stmt->bindValue(':deliveryMethod', $data->deliveryMethod, PDO::PARAM_STR);
-    $stmt->bindValue(':reciver', $data->reciver, PDO::PARAM_STR);
-    $stmt->bindValue(':payer', $data->payer, PDO::PARAM_STR);
-    $stmt->bindValue(':seller', $data->seller, PDO::PARAM_STR);
-    $stmt->bindValue(':assJm', $data->assJm, PDO::PARAM_STR);
-    $stmt->bindValue(':issuedBy', $data->issuedBy, PDO::PARAM_STR);
-    $stmt->bindValue(':recived', $data->recived, PDO::PARAM_STR);
-    $stmt->bindValue(':comments', $data->comments, PDO::PARAM_STR);
-    $stmt->bindValue(':payDate', $data->payDate, PDO::PARAM_STR);
-
+    $stmt->bindValue(':invoiceNum', $data['invoiceNum'], PDO::PARAM_STR);
+$stmt->bindValue(':issueDate', $data['issueDate'], PDO::PARAM_STR);
+$stmt->bindValue(':paymentMethod', $data['paymentMethod'], PDO::PARAM_STR);
+$stmt->bindValue(':currency', $data['currency'], PDO::PARAM_STR);
+$stmt->bindValue(':netPrice', $data['netPrice'], PDO::PARAM_STR);
+$stmt->bindValue(':VAT', $data['VAT'], PDO::PARAM_STR);
+$stmt->bindValue(':issuerID', $data['issuerID'], PDO::PARAM_INT);
+$stmt->bindValue(':clientID', $data['clientID'], PDO::PARAM_INT);
+$stmt->bindValue(':materialName', $data['materialName'], PDO::PARAM_STR);
+$stmt->bindValue(':amount', $data['amount'], PDO::PARAM_STR);
+$stmt->bindValue(':dueDate', $data['dueDate'], PDO::PARAM_STR);
+$stmt->bindValue(':invoiceType', $data['invoiceType'], PDO::PARAM_STR);
+$stmt->bindValue(':issuePlace', $data['issuePlace'], PDO::PARAM_STR);
+$stmt->bindValue(':deliveryMethod', $data['deliveryMethod'], PDO::PARAM_STR);
+$stmt->bindValue(':reciver', $data['reciver'], PDO::PARAM_STR);
+$stmt->bindValue(':payer', $data['payer'], PDO::PARAM_STR);
+$stmt->bindValue(':seller', $data['seller'], PDO::PARAM_STR);
+$stmt->bindValue(':assJm', $data['assJm'], PDO::PARAM_STR);
+$stmt->bindValue(':issuedBy', $data['issuedBy'], PDO::PARAM_STR);
+$stmt->bindValue(':recived', $data['recived'], PDO::PARAM_STR);
+$stmt->bindValue(':comments', $data['comments'], PDO::PARAM_STR);
+$stmt->bindValue(':payDate', $data['payDate'], PDO::PARAM_STR);
+	
     // Wykonanie zapytania SQL
     $stmt->execute();
 
@@ -95,4 +97,3 @@ try {
 } catch (PDOException $e) {
     echo json_encode(["error" => "Connection failed: " . $e->getMessage()]);
 }
-
